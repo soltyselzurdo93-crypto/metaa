@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+<title>Become a Meta Business Partner specialising in Facebook, Instagram and Messenger</title>
+<meta name="description" content="Learn how to become a Meta Business Partner. Connect with clients and increase a business visibility and credibility on Facebook, Instagram and Messenger."/>
+<link rel="icon" href="/images/icons/ic_favicon.png"/>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; min-height: 100vh; display: flex; flex-direction: column; color: #1C2B33; background: #fff; }
+
+  /* NAV */
+  .nav { background: rgba(255,255,255,0.85); backdrop-filter: blur(20px); position: sticky; top: 0; z-index: 50; border-bottom: 1px solid rgba(0,0,0,0.06); }
+  .nav-inner { max-width: 1504px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 0 32px; height: 64px; }
+  .nav-logo { display: flex; align-items: center; }
+  .nav-logo img.logo { width: 61px; }
+  .nav-links { display: flex; align-items: center; gap: 28px; margin-left: 50px; }
+  .nav-links span { cursor: pointer; color: #0A1317; font-size: 14px; font-weight: 400; transition: opacity 0.2s; }
+  .nav-links span:hover { opacity: 0.7; }
+  .nav-right { display: flex; align-items: center; gap: 40px; }
+  .nav-right .page-link { cursor: pointer; color: #0A1317; font-size: 14px; }
+  .btn-primary { cursor: pointer; background: #0457CB; color: #fff; font-weight: 600; font-size: 14px; padding: 8px 24px; border-radius: 100px; border: none; transition: background 0.2s; }
+  .btn-primary:hover { background: #034ab0; }
+
+  /* HERO */
+  .hero { padding: 80px 24px; }
+  .hero-inner { max-width: 1504px; margin: 0 auto; }
+  .hero h1 { font-size: clamp(2.25rem, 5vw, 4rem); font-weight: 500; color: #1C2B33; text-align: center; max-width: 80%; margin: 0 auto; }
+  .hero p { font-size: 16px; color: #5D6C7B; text-align: center; padding: 16px 16px 0; font-weight: 400; max-width: 60%; margin: 0 auto; line-height: 1.6; }
+  .hero-btn { margin: 24px auto 32px; min-height: 45px; cursor: pointer; background: #0457CB; max-width: 135px; border-radius: 100px; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+  .hero-btn:hover { background: #034ab0; }
+  .hero-btn span { font-size: 15px; color: #fff; font-weight: 500; }
+  .hero-video-wrap { width: 60%; margin: 80px auto 0; position: relative; border-radius: 32px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.1); aspect-ratio: 16/9; background: #111; }
+  .hero-video-wrap video { width: 100%; height: 100%; object-fit: cover; }
+  .video-overlay { position: absolute; inset-x: 0; bottom: 0; height: 33%; background: linear-gradient(to top, rgba(0,0,0,0.2), transparent); pointer-events: none; opacity: 0.6; }
+  .pause-btn { position: absolute; bottom: 24px; right: 24px; z-index: 10; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.2); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.4); border-radius: 50%; color: #fff; cursor: pointer; transition: all 0.3s; }
+  .pause-btn:hover { background: rgba(255,255,255,0.4); }
+
+  /* TRUSTED */
+  .trusted { max-width: 1504px; margin: 0 auto; padding: 0 32px 80px; }
+  .trusted .t1 { font-size: clamp(28px, 3vw, 36px); font-weight: 500; color: #1C2B33; line-height: 1.2; max-width: 83%; }
+  .trusted .t2 { font-size: 18px; margin-top: 18px; color: #3d4f5a; line-height: 1.6; }
+
+  /* EXPLORE */
+  .explore { background: #fff; }
+  .explore-inner { max-width: 1504px; margin: 0 auto; padding: 0 32px 40px; }
+  .explore h2 { font-size: clamp(28px, 3vw, 36px); font-weight: 500; color: #1C2B33; line-height: 1.2; }
+  .cards { display: flex; flex-wrap: wrap; margin: 40px -12px 0; }
+  .card { width: calc(33.333% - 24px); margin: 0 12px 24px; background: #fff; border-radius: 24px; padding: 40px; border: 1px solid rgba(10,19,23,0.12); display: flex; flex-direction: column; transition: box-shadow 0.2s; }
+  .card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.08); }
+  .card-icon { width: 84px; height: 84px; border-radius: 50%; overflow: hidden; margin-bottom: 24px; }
+  .card-icon img { width: 100%; height: 100%; object-fit: cover; }
+  .card h3 { font-size: clamp(20px, 2vw, 24px); color: #0A1317; font-weight: 500; margin-bottom: 12px; line-height: 1.2; }
+  .card p { font-size: 16px; color: #5D6C7B; line-height: 1.5; }
+  .card a { color: #0064E0; }
+
+  /* TOOLS */
+  .tools { background: #f6f6f6; }
+  .tools-inner { max-width: 1504px; margin: 0 auto; padding: 80px 32px; }
+  .tools h1 { font-size: clamp(28px, 3vw, 36px); font-weight: 500; margin-bottom: 56px; }
+  .tools-layout { display: flex; align-items: stretch; gap: 80px; }
+  .tools-list { width: 40%; border-top: 1px solid #ddd; flex-shrink: 0; }
+  .tool-item { padding: 24px 0; cursor: pointer; border-bottom: 1px solid #ddd; }
+  .tool-item h3 { font-size: 20px; font-weight: 400; color: #0A1317; display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+  .tool-item h3 img { width: 32px; height: 32px; flex-shrink: 0; }
+  .tool-item.active h3 { font-weight: 500; }
+  .tool-content { display: none; max-width: 80%; margin-top: 8px; }
+  .tool-item.active .tool-content { display: block; }
+  .tool-content p { padding: 6px 0 16px; color: #5D6C7B; font-size: 15px; line-height: 1.6; }
+  .learn-link { display: flex; align-items: center; gap: 8px; cursor: pointer; margin-bottom: 8px; width: fit-content; }
+  .learn-link .circle { width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(10,19,23,0.45); display: flex; align-items: center; justify-content: center; transition: border-color 0.3s; flex-shrink: 0; }
+  .learn-link .circle img { width: 24px; height: 24px; }
+  .learn-link:hover .circle { border-color: #007BFF; }
+  .learn-link span { font-size: 14px; color: #007BFF; font-weight: 500; }
+  .tools-video { flex: 1; display: flex; align-items: center; justify-content: center; }
+  .tools-video-inner { aspect-ratio: 3/4; max-width: 470px; width: 100%; position: relative; border-radius: 32px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.1); background: #111; }
+  .tools-video-inner video { width: 100%; height: 100%; object-fit: cover; }
+
+  /* STORIES */
+  .stories { background: #fff; padding: 80px 0; }
+  .stories-inner { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+  .stories h2 { font-size: clamp(32px, 3vw, 36px); font-weight: 500; color: #1C2B33; margin-bottom: 56px; line-height: 1.3; }
+  .stories-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 80px; }
+  .story-card { display: flex; flex-direction: column; cursor: pointer; }
+  .story-thumb { position: relative; aspect-ratio: 3/4; border-radius: 20px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.12); background: #ccc; }
+  .story-thumb img, .story-thumb video { width: 100%; height: 100%; object-fit: cover; }
+  .story-thumb img { transition: transform 0.3s; }
+  .story-card:hover .story-thumb img { transform: scale(1.03); }
+  .story-play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.1); transition: background 0.2s; }
+  .story-card:hover .story-play { background: rgba(0,0,0,0.2); }
+  .play-circle { width: 64px; height: 64px; border-radius: 50%; border: 3px solid #fff; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(4px); transition: transform 0.3s; }
+  .story-card:hover .play-circle { transform: scale(1.1); }
+  .story-card p { font-size: clamp(20px, 2vw, 24px); font-weight: 500; color: #1C2B33; margin-top: 24px; line-height: 1.4; }
+
+  /* REACH */
+  .reach { background: #fff; padding: 0 0 80px; }
+  .reach-inner { max-width: 1240px; margin: 0 auto; display: flex; align-items: center; gap: 40px; padding: 0 24px; }
+  .reach-text { flex: 1; }
+  .reach-text h2 { font-size: clamp(32px, 3vw, 36px); font-weight: 500; color: #1C2B33; margin-bottom: 24px; line-height: 1.2; }
+  .reach-text p { font-size: 18px; color: #5D6C7B; margin-bottom: 40px; max-width: 500px; }
+  .reach-actions { display: flex; align-items: center; gap: 32px; }
+  .btn-blue { background: #0457CB; color: #fff; padding: 12px 32px; border-radius: 100px; font-weight: 500; font-size: 15px; cursor: pointer; border: none; transition: background 0.2s; }
+  .btn-blue:hover { background: #034ab0; }
+  .reach-image { flex: 1; }
+  .reach-image img { width: 100%; height: auto; object-fit: contain; }
+
+  /* SOCIAL */
+  .social-section { background: #fff; padding: 80px 0; }
+  .social-inner { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+  .social-label { font-size: 12px; color: #5D6C7B; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
+  .social-inner > h2 { font-size: clamp(32px, 3vw, 36px); font-weight: 500; color: #1C2B33; margin-bottom: 56px; }
+  .social-layout { display: flex; gap: 40px; align-items: flex-start; }
+  .social-icons-col { display: flex; flex-direction: column; gap: 24px; padding-top: 80px; min-width: 32px; }
+  .social-icons-col img { width: 32px; height: 32px; cursor: pointer; transition: all 0.3s; object-fit: contain; }
+  .social-icons-col img.active { opacity: 1; filter: none; }
+  .social-icons-col img.inactive { opacity: 0.2; filter: grayscale(1); }
+  .social-video-wrap { position: relative; max-width: 504px; width: 100%; flex-shrink: 0; }
+  .social-video-wrap .vid { border-radius: 24px; overflow: hidden; aspect-ratio: 3/4; background: #111; }
+  .social-video-wrap video { width: 100%; height: 100%; object-fit: cover; }
+  .social-text { padding-top: 160px; padding-left: 40px; flex: 1; }
+  .social-text .sub { font-size: 14px; color: #5D6C7B; margin-bottom: 8px; }
+  .social-text h3 { font-size: clamp(32px, 3vw, 36px); font-weight: 500; color: #1C2B33; margin-bottom: 16px; line-height: 1.2; }
+  .social-text p { font-size: 16px; color: #5D6C7B; margin-bottom: 32px; line-height: 1.6; }
+
+  /* SUPPORT */
+  .support { background: #f6f6f6; padding: 56px 0; }
+  .support-inner { max-width: 1504px; margin: 0 auto; display: flex; align-items: center; gap: 64px; padding: 0 32px; }
+  .support-video { flex: 1; position: relative; border-radius: 24px; overflow: hidden; aspect-ratio: 1; background: #000; }
+  .support-video video { width: 100%; height: 100%; object-fit: cover; opacity: 0.95; }
+  .support-card { position: absolute; top: 60%; left: 50%; transform: translateX(-50%); width: 70%; background: #fff; border-radius: 8px; padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 12px 40px rgba(0,0,0,0.15); }
+  .support-card span { font-size: 18px; font-weight: 500; color: #1C2B33; white-space: nowrap; }
+  .support-text { flex: 1; max-width: 500px; }
+  .support-text .tag { font-size: 12px; color: #5D6C7B; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; font-weight: 500; }
+  .support-text h2 { font-size: clamp(32px, 3vw, 40px); font-weight: 500; color: #1C2B33; line-height: 1.2; margin-bottom: 32px; }
+  .btn-fb { background: #1877F2; color: #fff; padding: 14px 32px; border-radius: 100px; font-weight: 600; font-size: 16px; border: none; cursor: pointer; transition: background 0.2s; }
+  .btn-fb:hover { background: #166fe5; }
+
+  /* CTA */
+  .cta-section { padding: 100px 16px; display: flex; align-items: center; justify-content: center; text-align: center; background-image: url('/images/background.webp'); background-size: cover; background-position: center; }
+  .cta-inner { max-width: 1240px; display: flex; flex-direction: column; align-items: center; gap: 32px; }
+  .cta-inner h2 { font-size: clamp(28px, 3vw, 36px); font-weight: 500; color: #1C2B33; }
+
+  /* FOOTER */
+  footer.footer-top { background: #1b2a34; color: #fff; }
+  .footer-top-inner { max-width: 1175px; margin: 0 auto; padding: 80px 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+  .footer-top-inner h2 { font-size: 30px; font-weight: 600; line-height: 1.35; margin-bottom: 16px; }
+  .footer-top-inner > div > p { color: #9eafba; max-width: 420px; font-size: 15px; }
+  .footer-form { display: flex; flex-direction: column; gap: 16px; }
+  .footer-form .inputs { display: flex; gap: 16px; }
+  .footer-form input { flex: 1; padding: 12px 16px; border-radius: 8px; border: none; outline: none; font-size: 16px; color: #465a69; }
+  .footer-form .disclaimer { font-size: 12px; color: #9eafba; line-height: 1.6; }
+  .footer-form .disclaimer span { text-decoration: underline; cursor: pointer; }
+  .btn-subscribe { background: #0062ff; color: #fff; padding: 0 24px; height: 50px; border-radius: 100px; font-weight: 600; font-size: 15px; border: none; cursor: pointer; display: inline-flex; align-items: center; }
+  .footer-divider { border-top: 1px solid rgba(255,255,255,0.2); }
+  footer.footer-bottom { background: #1b2a34; color: #9eafba; }
+  .footer-bottom-inner { max-width: 1175px; margin: 0 auto; padding: 80px 24px; }
+  .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+  .footer-col h3 { color: #cbd2d9; font-size: 18px; margin-bottom: 16px; font-weight: 400; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .footer-col ul li a { color: #9eafba; font-size: 13px; text-decoration: none; transition: color 0.2s; }
+  .footer-col ul li a:hover { color: #e2e8f0; }
+  .footer-bottom-bar { border-top: 1px solid #465A69; padding-top: 48px; margin-top: 48px; display: flex; justify-content: space-between; align-items: flex-start; }
+  .footer-copy { font-size: 13px; color: #cbd2d9; }
+  .footer-social { display: flex; gap: 12px; margin-top: 16px; }
+  .footer-social img { width: 24px; height: 24px; }
+  .footer-links { display: flex; flex-wrap: wrap; gap: 16px 24px; }
+  .footer-links a { color: #cbd2d9; font-size: 13px; text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: #e2e8f0; }
+
+  @media (max-width: 768px) {
+    .nav-inner { padding: 0 16px; height: 60px; }
+    .nav-links, .nav-right { display: none; }
+    .hero h1 { max-width: 100%; }
+    .hero p { max-width: 100%; }
+    .hero-video-wrap { width: 100%; }
+    .card { width: calc(100% - 24px); }
+    .tools-layout { flex-direction: column; }
+    .tools-list { width: 100%; }
+    .stories-grid { grid-template-columns: 1fr; gap: 32px; }
+    .reach-inner { flex-direction: column; }
+    .social-layout { flex-direction: column; }
+    .social-icons-col { flex-direction: row; padding-top: 0; margin-bottom: 24px; }
+    .social-text { padding-top: 0; padding-left: 0; }
+    .support-inner { flex-direction: column; }
+    .footer-top-inner { grid-template-columns: 1fr; }
+    .footer-form .inputs { flex-direction: column; }
+    .footer-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-bottom-bar { flex-direction: column; gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <img class="logo" src="/images/logo-meta.svg" alt="Meta"/>
+      <div class="nav-links">
+        <span>Get started</span>
+        <span>Advertise</span>
+        <span>Learn</span>
+        <span>Support</span>
+      </div>
+    </div>
+    <div class="nav-right">
+      <span class="page-link">Create a Page</span>
+      <button class="btn-primary">Start now</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <h1>Become a Meta Business Partner</h1>
+    <p>Become a Meta Business Partner to receive up to $3,000 in advertising credits, along with valuable benefits such as training, technical support, analytics tools, and opportunities to expand your client network. Get started now to claim your advertising credits.</p>
+    <div class="hero-btn"><span>Get started</span></div>
+    <div class="hero-video-wrap">
+      <video poster="/images/hero.webp" muted loop playsinline autoplay>
+        <source src="/videos/hero.mp4" type="video/mp4"/>
+      </video>
+      <div class="video-overlay"></div>
+      <button class="pause-btn" onclick="toggleVideo(this)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><rect x="14" y="3" width="5" height="18" rx="1"/><rect x="5" y="3" width="5" height="18" rx="1"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- TRUSTED -->
+<div class="trusted">
+  <p class="t1">Meta Business Partners are trusted experts</p>
+  <p class="t2">Join our global community of solution specialists, vetted by Meta for technical and service excellence. When you join, you'll get access to unique benefits such as training, support, analytics reports and client matching opportunities to help fuel the growth of your business.</p>
+</div>
+
+<!-- EXPLORE -->
+<div class="explore">
+  <div class="explore-inner">
+    <h2>Explore how Meta technologies can help transform your business.</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon"><img src="/images/icons/ic_performance.webp" alt=""/></div>
+        <h3>Improve ad performance</h3>
+        <p>Maximise campaign results and simplify the setup process with advanced ad creation tools.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon"><img src="/images/icons/ic_people.webp" alt=""/></div>
+        <h3>Reach more people</h3>
+        <p>Get ads to people most likely to be interested in your products or services with automated targeting tools.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon"><img src="/images/icons/ic_expert.webp" alt=""/></div>
+        <h3>Become an expert</h3>
+        <p>Upgrade your marketing skills with free online courses and certifications through <a href="#">Meta Blueprint.</a></p>
+      </div>
+      <div class="card">
+        <div class="card-icon"><img src="/images/icons/ic_solutions.webp" alt=""/></div>
+        <h3>Get personalised ad solutions</h3>
+        <p>See faster results in fewer steps with AI-enabled tools that generate ads your customers want to see.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon"><img src="/images/icons/ic_understand.webp" alt=""/></div>
+        <h3>Understand performance</h3>
+        <p>Access advanced marketing performance tracking with detailed overviews of audience behaviour.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon"><img src="/images/icons/ic_formats.webp" alt=""/></div>
+        <h3>Use ad formats that work</h3>
+        <p>Designed to fit specific business goals, reach and expand your audience across every device.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOOLS -->
+<div class="tools">
+  <div class="tools-inner">
+    <h1>Gain access to tools that deliver results.</h1>
+    <div class="tools-layout">
+      <div class="tools-list">
+
+        <div class="tool-item active" onclick="selectTool(this,'/videos/ads_manager.mp4','/images/ads_manager.webp')">
+          <h3>Ads Manager <img src="/images/icons/ic_apart.svg" alt=""/></h3>
+          <div class="tool-content">
+            <p>Create and track new ads, monitor your budget and increase sales across Facebook, Messenger, Instagram and WhatsApp – all from one place.</p>
+            <div class="learn-link"><div class="circle"><img src="/images/icons/ic_arrow_left.svg" alt=""/></div><span>Learn more</span></div>
+            <div class="learn-link"><div class="circle"><img src="/images/icons/ic_arrow_left.svg" alt=""/></div><span>Go to Ads Manager</span></div>
+          </div>
+        </div>
+
+        <div class="tool-item" onclick="selectTool(this,'/videos/ads_manager.mp4','/images/ads_manager.webp')">
+          <h3>Meta Business Suite <img src="/images/icons/ic_plus.svg" alt=""/></h3>
+          <div class="tool-content">
+            <p>Manage your Facebook and Instagram accounts in one place. Schedule posts, respond to messages, and track your performance.</p>
+            <div class="learn-link"><div class="circle"><img src="/images/icons/ic_arrow_left.svg" alt=""/></div><span>Learn more</span></div>
+          </div>
+        </div>
+
+        <div class="tool-item" onclick="selectTool(this,'/videos/ads_manager.mp4','/images/ads_manager.webp')">
+          <h3>Meta pixel <img src="/images/icons/ic_plus.svg" alt=""/></h3>
+          <div class="tool-content">
+            <p>Track visitor activity on your website and measure the effectiveness of your advertising with the Meta Pixel.</p>
+            <div class="learn-link"><div class="circle"><img src="/images/icons/ic_arrow_left.svg" alt=""/></div><span>Learn more</span></div>
+          </div>
+        </div>
+
+        <div class="tool-item" onclick="selectTool(this,'/videos/ads_manager.mp4','/images/ads_manager.webp')">
+          <h3>Facebook Pages <img src="/images/icons/ic_plus.svg" alt=""/></h3>
+          <div class="tool-content">
+            <p>Build a presence on Facebook with a Page for your business. Connect with customers and share updates.</p>
+            <div class="learn-link"><div class="circle"><img src="/images/icons/ic_arrow_left.svg" alt=""/></div><span>Learn more</span></div>
+          </div>
+        </div>
+
+        <div class="tool-item" onclick="selectTool(this,'/videos/ads_manager.mp4','/images/ads_manager.webp')">
+          <h3>AI tools (performance marketing) <img src="/images/icons/ic_plus.svg" alt=""/></h3>
+          <div class="tool-content">
+            <p>Leverage AI-powered tools to optimise your campaigns, generate creative assets and reach your goals faster.</p>
+            <div class="learn-link"><div class="circle"><img src="/images/icons/ic_arrow_left.svg" alt=""/></div><span>Learn more</span></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="tools-video">
+        <div class="tools-video-inner">
+          <video id="toolsVideo" poster="/images/ads_manager.webp" muted loop playsinline autoplay>
+            <source src="/videos/ads_manager.mp4" type="video/mp4"/>
+          </video>
+          <div class="video-overlay"></div>
+          <button class="pause-btn" onclick="toggleVideo(this)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><rect x="14" y="3" width="5" height="18" rx="1"/><rect x="5" y="3" width="5" height="18" rx="1"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STORIES -->
+<section class="stories">
+  <div class="stories-inner">
+    <h2>Be inspired by reading how best-in-class marketers scale their business with Meta technologies.</h2>
+    <div class="stories-grid">
+
+      <div class="story-card" onclick="playStoryVideo(this)">
+        <div class="story-thumb">
+          <video src="/videos/streetwear.mp4" poster="/images/streetwear.webp" playsinline style="display:none;width:100%;height:100%;object-fit:cover;"></video>
+          <img src="/images/streetwear.webp" alt="Streetwear"/>
+          <div class="story-play"><div class="play-circle"><svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></svg></div></div>
+        </div>
+        <p>Streetwear brand Market shares tips on how to hype up your next product drop</p>
+      </div>
+
+      <div class="story-card" onclick="playStoryVideo(this)">
+        <div class="story-thumb">
+          <video src="/videos/brooklinen.mp4" poster="/images/brooklinen.webp" playsinline style="display:none;width:100%;height:100%;object-fit:cover;"></video>
+          <img src="/images/brooklinen.webp" alt="Brooklinen"/>
+          <div class="story-play"><div class="play-circle"><svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></svg></div></div>
+        </div>
+        <p>Brooklinen's tips for maximising your ad budget</p>
+      </div>
+
+      <div class="story-card" onclick="playStoryVideo(this)">
+        <div class="story-thumb">
+          <video src="/videos/shopify.mp4" poster="/images/shopify.webp" playsinline style="display:none;width:100%;height:100%;object-fit:cover;"></video>
+          <img src="/images/shopify.webp" alt="Shopify"/>
+          <div class="story-play"><div class="play-circle"><svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></svg></div></div>
+        </div>
+        <p>Shopify's tips for reaching the right audience</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- REACH -->
+<section class="reach">
+  <div class="reach-inner">
+    <div class="reach-text">
+      <h2>Reach more customers with ads on Meta technologies.</h2>
+      <p>Discover everything you need to start advertising your business.</p>
+      <div class="reach-actions">
+        <button class="btn-blue">Learn more</button>
+        <div class="learn-link">
+          <div class="circle"><img src="/images/icons/ic_arrow_left.svg" alt=""/></div>
+          <span>Create ad</span>
+        </div>
+      </div>
+    </div>
+    <div class="reach-image">
+      <img src="/images/media.webp" alt="Meta Platforms Illustration"/>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL -->
+<section class="social-section">
+  <div class="social-inner">
+    <p class="social-label">Meta technologies</p>
+    <h2>Stay connected to your audience.</h2>
+    <div class="social-layout">
+      <div class="social-icons-col">
+        <img src="/images/icons/ic_facebook_color.svg" alt="Facebook" class="active"
+          onclick="switchSocial(this,'/videos/fans.mp4','/images/fans.webp','Marketing on Facebook','Find fans and build a following.','Create lasting relationships with customers everywhere by marketing with Facebook.','Explore Facebook')"/>
+        <img src="/images/icons/ic_message_color.svg" alt="Messenger" class="inactive"
+          onclick="switchSocial(this,'/videos/fans.mp4','/images/fans.webp','Marketing on Messenger','Connect at scale.','Reach your customers directly with personalised messaging on Messenger.','Explore Messenger')"/>
+        <img src="/images/icons/ic_instagram_color.webp" alt="Instagram" class="inactive"
+          onclick="switchSocial(this,'/videos/fans.mp4','/images/fans.webp','Marketing on Instagram','Inspire your audience.','Tell your story visually and connect with people who love what you do on Instagram.','Explore Instagram')"/>
+        <img src="/images/icons/ic_whatshap_color.svg" alt="WhatsApp" class="inactive"
+          onclick="switchSocial(this,'/videos/fans.mp4','/images/fans.webp','Marketing on WhatsApp','Build customer relationships.','Connect with customers around the world through WhatsApp Business messaging.','Explore WhatsApp')"/>
+      </div>
+
+      <div class="social-video-wrap">
+        <div class="vid">
+          <video id="socialVideo" src="/videos/fans.mp4" poster="/images/fans.webp" autoplay loop muted playsinline></video>
+        </div>
+        <button class="pause-btn" onclick="toggleVideo(this)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><rect x="14" y="3" width="5" height="18" rx="1"/><rect x="5" y="3" width="5" height="18" rx="1"/></svg>
+        </button>
+      </div>
+
+      <div class="social-text">
+        <p class="sub" id="socialSub">Marketing on Facebook</p>
+        <h3 id="socialTitle">Find fans and build a following.</h3>
+        <p id="socialDesc">Create lasting relationships with customers everywhere by marketing with Facebook.</p>
+        <div class="learn-link">
+          <div class="circle"><img src="/images/icons/ic_arrow_left.svg" alt="" style="transform:scaleX(-1)"/></div>
+          <span id="socialLink">Explore Facebook</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUPPORT -->
+<section class="support">
+  <div class="support-inner">
+    <div class="support-video">
+      <video src="/videos/support.mp4" poster="/images/thumb_support.webp" autoplay loop muted playsinline></video>
+      <div class="support-card">
+        <span>Create a page</span>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5D6C7B" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.34-4.34"/></svg>
+      </div>
+      <button class="pause-btn" onclick="toggleVideo(this)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><rect x="14" y="3" width="5" height="18" rx="1"/><rect x="5" y="3" width="5" height="18" rx="1"/></svg>
+      </button>
+    </div>
+    <div class="support-text">
+      <p class="tag">Meta Business Help Centre</p>
+      <h2>Get answers to FAQ, plus help and support with troubleshooting business accounts.</h2>
+      <button class="btn-fb">Get support</button>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <h2>Additional resources for your business.</h2>
+    <button class="btn-fb">Learn more</button>
+  </div>
+</section>
+
+<!-- FOOTER TOP -->
+<footer class="footer-top">
+  <div class="footer-top-inner">
+    <div>
+      <h2>Get the latest updates from Meta for business.</h2>
+      <p>Provide your email address to receive the latest updates from Meta for business, including news, events and product updates.</p>
+    </div>
+    <div class="footer-form">
+      <div class="inputs">
+        <input type="email" placeholder="Email address"/>
+        <input type="text" placeholder="Enter a country name..."/>
+      </div>
+      <p class="disclaimer">By submitting this form, you agree to receive marketing related electronic communications from Meta, including news, events, updates and promotional emails. You may withdraw your consent and unsubscribe from these at any time. For more information about how Meta handles your data, please read our <span>Data Policy</span>.</p>
+      <div><button class="btn-subscribe">Subscribe</button></div>
+    </div>
+  </div>
+  <div class="footer-divider"></div>
+</footer>
+
+<!-- FOOTER BOTTOM -->
+<footer class="footer-bottom">
+  <div class="footer-bottom-inner">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h3>Meta technologies</h3>
+        <ul>
+          <li><a href="#">Facebook</a></li><li><a href="#">Instagram</a></li>
+          <li><a href="#">Messenger</a></li><li><a href="#">WhatsApp</a></li>
+          <li><a href="#">Audience Network</a></li><li><a href="#">Meta Quest</a></li>
+          <li><a href="#">Workplace</a></li><li><a href="#">Meta for Work</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Tools</h3>
+        <ul>
+          <li><a href="#">Free tools</a></li><li><a href="#">Facebook Pages</a></li>
+          <li><a href="#">Instagram profiles</a></li><li><a href="#">Stories</a></li>
+          <li><a href="#">Shops</a></li><li><a href="#">Meta Business Suite</a></li>
+          <li><a href="#">Facebook ads</a></li><li><a href="#">Ads Manager</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Goals</h3>
+        <ul>
+          <li><a href="#">Set up a Facebook Page</a></li><li><a href="#">Build brand awareness</a></li>
+          <li><a href="#">Promote your local business</a></li><li><a href="#">Grow online sales</a></li>
+          <li><a href="#">Promote your app</a></li><li><a href="#">Generate leads</a></li>
+          <li><a href="#">Measure and optimise ads</a></li><li><a href="#">Retarget existing customers</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Business types</h3>
+        <ul>
+          <li><a href="#">Small business</a></li><li><a href="#">Large businesses</a></li>
+          <li><a href="#">Agency</a></li><li><a href="#">Media and publisher</a></li>
+          <li><a href="#">Creator</a></li><li><a href="#">Developer</a></li>
+          <li><a href="#">Business partner</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Industries</h3>
+        <ul>
+          <li><a href="#">Automotive</a></li><li><a href="#">Consumer packaged goods</a></li>
+          <li><a href="#">E-commerce</a></li><li><a href="#">Entertainment and media</a></li>
+          <li><a href="#">Financial services</a></li><li><a href="#">Gaming</a></li>
+          <li><a href="#">Retail</a></li><li><a href="#">Travel</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Skills and training</h3>
+        <ul>
+          <li><a href="#">Online learning</a></li>
+          <li><a href="#">Certification programmes</a></li>
+          <li><a href="#">Webinars</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Guides and resources</h3>
+        <ul>
+          <li><a href="#">Ads guide</a></li>
+          <li><a href="#">Brand safety and suitability</a></li>
+          <li><a href="#">"Click Here" book</a></li>
+          <li><a href="#">Media responsibility</a></li>
+          <li><a href="#">Sitemap</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom-bar">
+      <div>
+        <div class="footer-copy">© 2026 Meta</div>
+        <div class="footer-social">
+          <img src="/images/icons/ic_facebook.svg" alt="Facebook"/>
+          <img src="/images/icons/ic_instagram.svg" alt="Instagram"/>
+          <img src="/images/icons/ic_x.svg" alt="X"/>
+          <img src="/images/icons/ic_in.svg" alt="LinkedIn"/>
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="#">About</a><a href="#">Developers</a><a href="#">Careers</a>
+        <a href="#">Privacy</a><a href="#">Cookies</a><a href="#">Terms</a><a href="#">Help Centre</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Pause/Play bất kỳ video nào
+  function toggleVideo(btn) {
+    const wrap = btn.parentElement;
+    const video = wrap.querySelector('video');
+    if (!video) return;
+    if (video.paused) {
+      video.play();
+      btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="white"><rect x="14" y="3" width="5" height="18" rx="1"/><rect x="5" y="3" width="5" height="18" rx="1"/></svg>';
+    } else {
+      video.pause();
+      btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></svg>';
+    }
+  }
+
+  // Chọn tool → đổi icon + video bên phải
+  function selectTool(item, videoSrc, poster) {
+    document.querySelectorAll('.tool-item').forEach(i => {
+      i.classList.remove('active');
+      const img = i.querySelector('h3 img');
+      if (img) img.src = '/images/icons/ic_plus.svg';
+    });
+    item.classList.add('active');
+    const activeImg = item.querySelector('h3 img');
+    if (activeImg) activeImg.src = '/images/icons/ic_apart.svg';
+    const vid = document.getElementById('toolsVideo');
+    if (vid) { vid.poster = poster; vid.src = videoSrc; vid.load(); vid.play(); }
+  }
+
+  // Click story card → play/pause video
+  function playStoryVideo(card) {
+    const video = card.querySelector('video');
+    const img = card.querySelector('img');
+    const overlay = card.querySelector('.story-play');
+    if (!video) return;
+    const isHidden = video.style.display === 'none' || video.style.display === '';
+    if (isHidden) {
+      video.style.display = 'block';
+      if (img) img.style.display = 'none';
+      if (overlay) overlay.style.display = 'none';
+      video.play();
+    } else {
+      video.pause();
+      video.style.display = 'none';
+      if (img) img.style.display = 'block';
+      if (overlay) overlay.style.display = 'flex';
+    }
+  }
+
+  // Switch social icon
+  function switchSocial(icon, videoSrc, poster, sub, title, desc, link) {
+    document.querySelectorAll('.social-icons-col img').forEach(i => {
+      i.classList.remove('active'); i.classList.add('inactive');
+    });
+    icon.classList.remove('inactive'); icon.classList.add('active');
+    const vid = document.getElementById('socialVideo');
+    if (vid) { vid.src = videoSrc; vid.poster = poster; vid.load(); vid.play(); }
+    document.getElementById('socialSub').textContent = sub;
+    document.getElementById('socialTitle').textContent = title;
+    document.getElementById('socialDesc').textContent = desc;
+    document.getElementById('socialLink').textContent = link;
+  }
+</script>
+</body>
+</html>
