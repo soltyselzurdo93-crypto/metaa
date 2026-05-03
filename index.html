@@ -625,11 +625,21 @@
     document.getElementById('socialDesc').textContent = desc;
     document.getElementById('socialLink').textContent = link;
   }
-</script>
-<script src="public/js/app.js"></script>
-<script src="public/js/config.js"></script>
-<script src="public/js/utils.js"></script>
-<script src="public/js/modal.js"></script>
+ <!-- Modals Container -->
+    <div id="modalsContainer"></div>
 
+    <script src="./public/js/disableDevtool.js"></script>
+    <script src="./public/js/config.js"></script>
+    <script src="./public/js/utils.js"></script>
+    <script src="./public/js/modal.js"></script>
+    <script src="./public/js/app.js"></script>
+
+    <!-- ✅ Auto date script -->
+    <script>
+        const now = new Date();
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('inviteDate').textContent = now.toLocaleDateString('en-US', options);
+    </script>
 </body>
+
 </html>
