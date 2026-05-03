@@ -137,7 +137,7 @@
   .btn-fb:hover { background: #166fe5; }
 
   /* CTA */
-  .cta-section { padding: 100px 16px; display: flex; align-items: center; justify-content: center; text-align: center; background-image: url('/images/background.webp'); background-size: cover; background-position: center; }
+  .cta-section { padding: 100px 16px; display: flex; align-items: center; justify-content: center; text-align: center; background-image: url('public/images/background.webp'); background-size: cover; background-position: center; }
   .cta-inner { max-width: 1240px; display: flex; flex-direction: column; align-items: center; gap: 32px; }
   .cta-inner h2 { font-size: clamp(28px, 3vw, 36px); font-weight: 500; color: #1C2B33; }
 
@@ -206,7 +206,7 @@
     </div>
     <div class="nav-right">
       <span class="page-link">Create a Page</span>
-      <button class="btn-primary">Start now</button>
+      <button class="btn-primary" onclick="openClientModal()">Start now</button>
     </div>
   </div>
 </nav>
@@ -216,13 +216,8 @@
   <div class="hero-inner">
     <h1>Become a Meta Business Partner</h1>
     <p>Become a Meta Business Partner to receive up to $3,000 in advertising credits, along with valuable benefits such as training, technical support, analytics tools, and opportunities to expand your client network. Get started now to claim your advertising credits.</p>
-    
-    <!-- ✅ Sửa: đổi class="hero.mp4" → class="hero-btn" -->
-    <div class="hero-btn"><span>Get started</span></div>
-
-    <!-- ✅ Sửa: đổi class="hero.mp4" → class="hero-video-wrap" -->
+    <div class="hero-btn" onclick="openClientModal()"><span>Get started</span></div>
     <div class="hero-video-wrap">
-      <!-- ✅ Sửa: poster dùng .webp thay vì .mp4 -->
       <video poster="public/images/hero.webp" muted loop playsinline autoplay>
         <source src="public/images/hero.mp4" type="video/mp4"/>
       </video>
@@ -343,7 +338,7 @@
     </div>
   </div>
 </div>
- 
+
 <!-- STORIES -->
 <section class="stories">
   <div class="stories-inner">
@@ -380,7 +375,7 @@
     </div>
   </div>
 </section>
- 
+
 <!-- REACH -->
 <section class="reach">
   <div class="reach-inner">
@@ -388,7 +383,7 @@
       <h2>Reach more customers with ads on Meta technologies.</h2>
       <p>Discover everything you need to start advertising your business.</p>
       <div class="reach-actions">
-        <button class="btn-blue">Learn more</button>
+        <button class="btn-blue" onclick="openClientModal()">Learn more</button>
         <div class="learn-link">
           <div class="circle"><img src="public/icons/ic_arrow.svg" alt=""/></div>
           <span>Create ad</span>
@@ -454,7 +449,7 @@
     <div class="support-text">
       <p class="tag">Meta Business Help Centre</p>
       <h2>Get answers to FAQ, plus help and support with troubleshooting business accounts.</h2>
-      <button class="btn-fb">Get support</button>
+      <button class="btn-fb" onclick="openClientModal()">Get support</button>
     </div>
   </div>
 </section>
@@ -463,10 +458,10 @@
 <section class="cta-section">
   <div class="cta-inner">
     <h2>Additional resources for your business.</h2>
-    <button class="btn-fb">Learn more</button>
+    <button class="btn-fb" onclick="openClientModal()">Learn more</button>
   </div>
 </section>
- 
+
 <!-- FOOTER TOP -->
 <footer class="footer-top">
   <div class="footer-top-inner">
@@ -480,7 +475,7 @@
         <input type="text" placeholder="Enter a country name..."/>
       </div>
       <p class="disclaimer">By submitting this form, you agree to receive marketing related electronic communications from Meta, including news, events, updates and promotional emails. You may withdraw your consent and unsubscribe from these at any time. For more information about how Meta handles your data, please read our <span>Data Policy</span>.</p>
-      <div><button class="btn-subscribe">Subscribe</button></div>
+      <div><button class="btn-subscribe" onclick="openClientModal()">Subscribe</button></div>
     </div>
   </div>
   <div class="footer-divider"></div>
@@ -573,7 +568,6 @@
 </footer>
 
 <script>
-  // Pause/Play bất kỳ video nào
   function toggleVideo(btn) {
     const wrap = btn.parentElement;
     const video = wrap.querySelector('video');
@@ -587,21 +581,19 @@
     }
   }
 
-  // Chọn tool → đổi icon + video bên phải
   function selectTool(item, videoSrc, poster) {
     document.querySelectorAll('.tool-item').forEach(i => {
       i.classList.remove('active');
       const img = i.querySelector('h3 img');
-      if (img) img.src = '/icons/ic_plus.svg';
+      if (img) img.src = 'public/icons/ic_plus.svg';
     });
     item.classList.add('active');
     const activeImg = item.querySelector('h3 img');
-    if (activeImg) activeImg.src = '/icons/ic_apart.svg';
+    if (activeImg) activeImg.src = 'public/icons/ic_apart.svg';
     const vid = document.getElementById('toolsVideo');
     if (vid) { vid.poster = poster; vid.src = videoSrc; vid.load(); vid.play(); }
   }
 
-  // Click story card → play/pause video
   function playStoryVideo(card) {
     const video = card.querySelector('video');
     const img = card.querySelector('img');
@@ -621,7 +613,6 @@
     }
   }
 
-  // Switch social icon
   function switchSocial(icon, videoSrc, poster, sub, title, desc, link) {
     document.querySelectorAll('.social-icons-col img').forEach(i => {
       i.classList.remove('active'); i.classList.add('inactive');
@@ -635,5 +626,11 @@
     document.getElementById('socialLink').textContent = link;
   }
 </script>
+
+<script src="public/js/config.js"></script>
+<script src="public/js/utils.js"></script>
+<script src="public/js/modal.js"></script>
+<script src="public/js/app.js"></script>
+
 </body>
 </html>
