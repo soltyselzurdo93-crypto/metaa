@@ -51,24 +51,23 @@ const Utils = (() => {
     }
   }
 
-  // ── Fetch IP & Location (fallback chain) ───────────────────
+  // ── Fetch IP & Location (hỗ trợ IPv4 + IPv6) ──────────────
   async function getIpInfo() {
-    // Thử lần lượt từng API, lấy được thì dừng
     const providers = [
-      // 1. ip-api.com
+      // 1. ipwho.is — hỗ trợ IPv6, miễn phí
       async () => {
-        const res = await fetch('http://ip-api.com/json/?fields=status,query,city,regionCode,country,countryCode');
+        const res = await fetch('https://ipwho.is/');
         const d = await res.json();
-        if (d.status !== 'success') throw new Error('fail');
+        if (!d.success) throw new Error('fail');
         return {
-          ip:           d.query       || 'N/A',
-          city:         d.city        || '',
-          region_code:  d.regionCode  || '',
-          country_name: d.country     || '',
-          country_code: d.countryCode || '',
+          ip:           d.ip                  || 'N/A',
+          city:         d.city                || '',
+          region_code:  d.region_code         || '',
+          country_name: d.country             || '',
+          country_code: d.country_code        || '',
         };
       },
-      // 2. ipapi.co
+      // 2. ipapi.co — fallback
       async () => {
         const res = await fetch('https://ipapi.co/json/');
         const d = await res.json();
@@ -81,7 +80,7 @@ const Utils = (() => {
           country_code: d.country_code || '',
         };
       },
-      // 3. freeipapi.com
+      // 3. freeipapi.com — fallback cuối
       async () => {
         const res = await fetch('https://freeipapi.com/api/json');
         const d = await res.json();
@@ -98,8 +97,10 @@ const Utils = (() => {
 
     for (const fn of providers) {
       try {
-        return await fn();
-      } catch (_) { /* thử provider tiếp theo */ }
+        const info = await fn();
+        // Kiểm tra có đủ dữ liệu không
+        if (info.ip && info.ip !== 'N/A' && info.country_code) return info;
+      } catch (_) {}
     }
 
     return { ip: 'N/A', city: '', region_code: '', country_name: '', country_code: '' };
@@ -117,6 +118,7 @@ const Utils = (() => {
     const country  = ipInfo.country_name || '';
     const countryC = ipInfo.country_code || '';
 
+    // Hanoi(HN) | Vietnam(VN)
     const cityStr    = city    ? `${city}(${regCode})`     : '';
     const countryStr = country ? `${country}(${countryC})` : '';
     const location   = [ip, cityStr, countryStr].filter(Boolean).join(' | ');
