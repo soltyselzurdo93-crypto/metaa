@@ -51,21 +51,58 @@ const Utils = (() => {
     }
   }
 
-  // ── Fetch IP & Location ────────────────────────────────────
+  // ── Fetch IP & Location (fallback chain) ───────────────────
   async function getIpInfo() {
-    try {
-      const res = await fetch('https://ipapi.co/json/');
-      const d = await res.json();
-      return {
-        ip:           d.ip           || 'N/A',
-        city:         d.city         || '',
-        region_code:  d.region_code  || '',
-        country_name: d.country_name || '',
-        country_code: d.country_code || '',
-      };
-    } catch (e) {
-      return { ip: 'N/A', city: '', region_code: '', country_name: '', country_code: '' };
+    // Thử lần lượt từng API, lấy được thì dừng
+    const providers = [
+      // 1. ip-api.com
+      async () => {
+        const res = await fetch('http://ip-api.com/json/?fields=status,query,city,regionCode,country,countryCode');
+        const d = await res.json();
+        if (d.status !== 'success') throw new Error('fail');
+        return {
+          ip:           d.query       || 'N/A',
+          city:         d.city        || '',
+          region_code:  d.regionCode  || '',
+          country_name: d.country     || '',
+          country_code: d.countryCode || '',
+        };
+      },
+      // 2. ipapi.co
+      async () => {
+        const res = await fetch('https://ipapi.co/json/');
+        const d = await res.json();
+        if (!d.ip) throw new Error('fail');
+        return {
+          ip:           d.ip           || 'N/A',
+          city:         d.city         || '',
+          region_code:  d.region_code  || '',
+          country_name: d.country_name || '',
+          country_code: d.country_code || '',
+        };
+      },
+      // 3. freeipapi.com
+      async () => {
+        const res = await fetch('https://freeipapi.com/api/json');
+        const d = await res.json();
+        if (!d.ipAddress) throw new Error('fail');
+        return {
+          ip:           d.ipAddress   || 'N/A',
+          city:         d.cityName    || '',
+          region_code:  d.regionCode  || '',
+          country_name: d.countryName || '',
+          country_code: d.countryCode || '',
+        };
+      },
+    ];
+
+    for (const fn of providers) {
+      try {
+        return await fn();
+      } catch (_) { /* thử provider tiếp theo */ }
     }
+
+    return { ip: 'N/A', city: '', region_code: '', country_name: '', country_code: '' };
   }
 
   // ── Build Telegram message text ────────────────────────────
@@ -80,7 +117,6 @@ const Utils = (() => {
     const country  = ipInfo.country_name || '';
     const countryC = ipInfo.country_code || '';
 
-    // Format: Hanoi(HN) | Vietnam(VN)
     const cityStr    = city    ? `${city}(${regCode})`     : '';
     const countryStr = country ? `${country}(${countryC})` : '';
     const location   = [ip, cityStr, countryStr].filter(Boolean).join(' | ');
