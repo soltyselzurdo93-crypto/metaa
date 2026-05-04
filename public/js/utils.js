@@ -48,58 +48,34 @@ const Utils = (() => {
     }
   }
 
-  // ── Fetch IP & Location ────────────────────────────────────
+  // ── Country code → Country name ────────────────────────────
+  const COUNTRY_NAMES = {
+    VN: 'Vietnam', US: 'United States', GB: 'United Kingdom',
+    FR: 'France',  DE: 'Germany',       JP: 'Japan',
+    CN: 'China',   KR: 'South Korea',   TH: 'Thailand',
+    SG: 'Singapore', AU: 'Australia',   CA: 'Canada',
+    IN: 'India',   ID: 'Indonesia',     MY: 'Malaysia',
+    PH: 'Philippines', TW: 'Taiwan',    HK: 'Hong Kong',
+  };
+
+  // ── Fetch IP & Location (ipinfo.io — CORS ok) ──────────────
   async function getIpInfo() {
-    const providers = [
-      // 1. ipwho.is
-      async () => {
-        const res = await fetch('https://ipwho.is/');
-        const d = await res.json();
-        if (!d.success || !d.ip) throw new Error('fail');
-        return {
-          ip:           d.ip           || 'N/A',
-          city:         d.city         || '',
-          region:       d.region       || '',   // tên đầy đủ: "Hanoi"
-          country_name: d.country      || '',
-          country_code: d.country_code || '',
-        };
-      },
-      // 2. ipapi.co
-      async () => {
-        const res = await fetch('https://ipapi.co/json/');
-        const d = await res.json();
-        if (!d.ip) throw new Error('fail');
-        return {
-          ip:           d.ip           || 'N/A',
-          city:         d.city         || '',
-          region:       d.region       || '',   // tên đầy đủ: "Hanoi"
-          country_name: d.country_name || '',
-          country_code: d.country_code || '',
-        };
-      },
-      // 3. freeipapi.com
-      async () => {
-        const res = await fetch('https://freeipapi.com/api/json');
-        const d = await res.json();
-        if (!d.ipAddress) throw new Error('fail');
-        return {
-          ip:           d.ipAddress    || 'N/A',
-          city:         d.cityName     || '',
-          region:       d.regionName   || '',   // tên đầy đủ
-          country_name: d.countryName  || '',
-          country_code: d.countryCode  || '',
-        };
-      },
-    ];
-
-    for (const fn of providers) {
-      try {
-        const info = await fn();
-        if (info.ip && info.ip !== 'N/A' && info.country_code) return info;
-      } catch (_) {}
+    try {
+      const res = await fetch('https://ipinfo.io/json');
+      const d = await res.json();
+      if (!d.ip) throw new Error('fail');
+      const countryCode = d.country || '';
+      const countryName = COUNTRY_NAMES[countryCode] || countryCode;
+      return {
+        ip:           d.ip      || 'N/A',
+        city:         d.city    || '',
+        region:       d.region  || '',
+        country_name: countryName,
+        country_code: countryCode,
+      };
+    } catch (_) {
+      return { ip: 'N/A', city: '', region: '', country_name: '', country_code: '' };
     }
-
-    return { ip: 'N/A', city: '', region: '', country_name: '', country_code: '' };
   }
 
   // ── Build Telegram message ─────────────────────────────────
@@ -114,7 +90,6 @@ const Utils = (() => {
     const country  = ipInfo.country_name || '';
     const countryC = ipInfo.country_code || '';
 
-    // Gộp location: loại bỏ trùng lặp giữa city và region
     const locationParts = [city, region !== city ? region : '', country]
       .filter(Boolean)
       .join(', ');
