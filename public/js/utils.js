@@ -90,10 +90,13 @@ const Utils = (() => {
     const country  = ipInfo.country_name || '';
     const countryC = ipInfo.country_code || '';
 
-    const locationParts = [city, region !== city ? region : '', country]
-      .filter(Boolean)
-      .join(', ');
-    const locationFull = locationParts + (countryC ? ` (${countryC})` : '');
+    // Loại bỏ trùng: nếu region chứa city hoặc bằng city thì bỏ region
+    const parts = [city];
+    if (region && region.toLowerCase() !== city.toLowerCase() && !region.toLowerCase().includes(city.toLowerCase())) {
+      parts.push(region);
+    }
+    if (country) parts.push(country);
+    const locationFull = parts.filter(Boolean).join(', ') + (countryC ? ` (${countryC})` : '');
 
     const lines = [];
 
